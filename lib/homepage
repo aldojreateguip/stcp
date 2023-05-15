@@ -1,0 +1,39 @@
+
+body: FractionallySizedBox(
+          heightFactor: 1,
+          widthFactor: 1,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/logo_muni.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Container(
+                  color: Colors.green,
+                  height: 300,
+                ),
+                Container(
+                  color: Colors.red,
+                  height: 300,
+                ),
+                Container(
+                  color: Colors.green,
+                  height: 300,
+                ),
+                Container(
+                  color: Colors.red,
+                  height: 300,
+                ),
+                Container(
+                  color: Colors.green,
+                  height: 300,
+                ),
+              ],
+            ),
+          ),
+        ),
