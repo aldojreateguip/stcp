@@ -5,7 +5,7 @@ class LogoMuni extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double radiusX = 200, radiusY = 40, bodyHeight = 300;
+    const double radiusX = 200, radiusY = 30, bodyHeight = 340;
     const String imageUrl = 'assets/images/logo_muni.jpg';
     const Color opacityColor = Colors.black;
 
