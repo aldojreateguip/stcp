@@ -5,9 +5,12 @@ class LogoMuni extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double radiusX = 200, radiusY = 30, bodyHeight = 340;
+    const double radiusX = 200, radiusY = 30;
     const String imageUrl = 'assets/images/logo_muni.jpg';
     const Color opacityColor = Colors.black;
+
+    final screenHeight = MediaQuery.of(context).size.height;
+    final bodyHeight = screenHeight * 0.45;
 
     return Center(
       child: Container(
