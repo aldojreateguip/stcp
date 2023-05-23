@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                LogoMuni(),
                 LoginBody(),
               ],
             ),

@@ -4,9 +4,8 @@ import 'package:stcp/appbar.dart';
 class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return GestureDetector( 
       onTap: () {
-        // Quitar el foco del campo de texto cuando se haga clic fuera del mismo
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
