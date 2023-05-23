@@ -4,23 +4,53 @@ class LoginBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double bodyWidth = 1,
-        bodyHeight = 390,
         textMarginTop = 20,
         textScaleFactor = 2,
         textFontSize = 10;
     const FontWeight fontType = FontWeight.bold;
     const String textLogin = 'INICIAR SESIÓN';
+    const double radiusX = 200, radiusY = 30;
+    const String imageUrl = 'assets/images/logo_muni.jpg';
+    const Color opacityColor = Colors.black;
+
+    final screenHeight = MediaQuery.of(context).size.height;
+    final imageHeight = screenHeight * 0.45;
 
     return FractionallySizedBox(
       widthFactor: bodyWidth,
       child: SizedBox(
-        height: bodyHeight,
+        height: screenHeight,
         child: Align(
           alignment: Alignment.topCenter,
           child: Container(
-            margin: const EdgeInsets.only(top: textMarginTop),
             child: Column(
               children: [
+                Container(
+                  height: imageHeight,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.elliptical(radiusX, radiusY),
+                      bottomLeft: Radius.elliptical(radiusX, radiusY),
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage(imageUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Opacity(
+                    opacity: 0.1,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: opacityColor,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.elliptical(radiusX, radiusY),
+                          bottomLeft: Radius.elliptical(radiusX, radiusY),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: textMarginTop),
                 Text(
                   textLogin,
                   textScaleFactor: textScaleFactor,
@@ -45,7 +75,7 @@ class LoginBody extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'Contraseña',
@@ -84,7 +114,7 @@ class LoginBody extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
+                  margin: EdgeInsets.symmetric(vertical: 20),
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -94,7 +124,7 @@ class LoginBody extends StatelessWidget {
                           padding: EdgeInsets.only(right: 8),
                           child: ElevatedButton(
                             onPressed: () {
-                              // Acción a realizar cuando se presione el botón
+                              Navigator.pushNamed(context, '/register');
                             },
                             child: Text(
                               'REGÍSTRATE',
