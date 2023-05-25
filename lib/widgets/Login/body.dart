@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../forgot_password.dart';
+import '../../register.dart';
+
 class LoginBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -124,7 +127,27 @@ class LoginBody extends StatelessWidget {
                           padding: EdgeInsets.only(right: 8),
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/register');
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration: Duration(milliseconds: 250), // Ajusta la duración de la transición
+                                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                    var begin = Offset(0.0, 0.1); // Inicio de la transición desde la derecha
+                                    var end = Offset.zero; // Fin de la transición en la posición actual
+                                    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: Curves.easeInOut));
+                                    var offsetAnimation = animation.drive(tween);
+
+                                    return FadeTransition(
+                                      opacity: animation, // Aplica el efecto de desvanecimiento
+                                      child: SlideTransition(
+                                        position: offsetAnimation,
+                                        child: child,
+                                      ),
+                                    );
+                                  },
+                                  pageBuilder: (context, animation, secondaryAnimation) => Register(),
+                                ),
+                              );
                             },
                             child: Text(
                               'REGÍSTRATE',
@@ -150,7 +173,27 @@ class LoginBody extends StatelessWidget {
                           padding: EdgeInsets.only(left: 8),
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/forgot');
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration: Duration(milliseconds: 250), // Ajusta la duración de la transición
+                                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                    var begin = Offset(0.0, 0.1); // Inicio de la transición desde la derecha
+                                    var end = Offset.zero; // Fin de la transición en la posición actual
+                                    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: Curves.easeInOut));
+                                    var offsetAnimation = animation.drive(tween);
+
+                                    return FadeTransition(
+                                      opacity: animation, // Aplica el efecto de desvanecimiento
+                                      child: SlideTransition(
+                                        position: offsetAnimation,
+                                        child: child,
+                                      ),
+                                    );
+                                  },
+                                  pageBuilder: (context, animation, secondaryAnimation) => ForgotPassword(),
+                                ),
+                              );
                             },
                             child: Text(
                               'FORGOT PASSWORD',
