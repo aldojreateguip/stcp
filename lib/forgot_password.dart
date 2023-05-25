@@ -24,7 +24,7 @@ class ForgotPassword extends StatelessWidget {
                       'Por favor, ingrese el correo electrónico utilizado en su cuenta y le enviaremos un enlace para restablecer su contraseña.',
                       style: TextStyle(
                         fontSize: 18,
-                        color: Colors.blueGrey,
+                        color: Color(0xFF6B6B6B),
                       ),
                       textAlign: TextAlign.justify,
                     ),
