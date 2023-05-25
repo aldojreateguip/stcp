@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stcp/appbar.dart';
-import 'package:stcp/registerthree.dart';
+
+import 'homepage.dart';
 
 class Registerfour extends StatefulWidget {
   @override
@@ -49,14 +50,27 @@ class _RegisterState extends State<Registerfour> {
             ),
             Container(
               margin: EdgeInsets.only(top: 50),
-              child: Text(
-                'Esta acción requiere una verificación de correo. Por favor, revisa tu buzón de correo y sigue las instrucciones enviadas.\n\n'
-                'El mensaje de verificación se envió al siguiente correo:\n',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFF6B6B6B),
-                ),
-                textAlign: TextAlign.justify,
+              child: Column(
+                children: [
+                  Text(
+                    'Esta acción requiere una verificación de correo. Por favor, revisa tu buzón de correo y sigue las instrucciones enviadas.\n\n'
+                    'El mensaje de verificación se envió al siguiente correo:\n',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF6B6B6B),
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                  Text(
+                    'aadominguezn@gmail.com',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF26C767), // Color de texto negro
+                    ),
+                    textAlign: TextAlign.center, // Alineación centrada
+                  ),
+                ],
               ),
             ),
           ],
@@ -70,7 +84,7 @@ class _RegisterState extends State<Registerfour> {
                 PageRouteBuilder(
                   transitionDuration: Duration(milliseconds: 500), // Ajusta la duración de la transición
                   transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    var begin = Offset(1.0, 0.0); // Inicio de la transición desde la derecha
+                    var begin = Offset(0.0, 0.1); // Inicio de la transición desde la derecha
                     var end = Offset.zero; // Fin de la transición en la posición actual
                     var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: Curves.easeInOut));
                     var offsetAnimation = animation.drive(tween);
@@ -83,12 +97,12 @@ class _RegisterState extends State<Registerfour> {
                       ),
                     );
                   },
-                  pageBuilder: (context, animation, secondaryAnimation) => Registerthree(),
+                  pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
                 ),
               );
             },
             child: Text(
-              'CONTINUAR',
+              'FINALIZAR',
               style: TextStyle(fontSize: 10),
               textScaleFactor: 2,
             ),
