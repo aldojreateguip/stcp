@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stcp/appbar.dart';
+import 'package:stcp/widgets/appbar.dart';
 
 import 'homepage.dart';
 
@@ -17,7 +17,8 @@ class _RegisterState extends State<Registerfour> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height * 0.12, // Altura del 20% de la pantalla
+          height: MediaQuery.of(context).size.height *
+              0.12, // Altura del 20% de la pantalla
           child: Image.asset(imageUrl),
         ),
         Text(
@@ -39,7 +40,8 @@ class _RegisterState extends State<Registerfour> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: const Header(title: 'REGISTRO - PASO 4', background: '#FF2D3E50', height: 56),
+        appBar: const Header(
+            title: 'REGISTRO - PASO 4', background: '#FF2D3E50', height: 56),
         body: ListView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -82,11 +84,16 @@ class _RegisterState extends State<Registerfour> {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  transitionDuration: Duration(milliseconds: 500), // Ajusta la duración de la transición
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    var begin = Offset(0.0, 0.1); // Inicio de la transición desde la derecha
-                    var end = Offset.zero; // Fin de la transición en la posición actual
-                    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: Curves.easeInOut));
+                  transitionDuration: Duration(
+                      milliseconds: 500), // Ajusta la duración de la transición
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    var begin = Offset(
+                        0.0, 0.1); // Inicio de la transición desde la derecha
+                    var end = Offset
+                        .zero; // Fin de la transición en la posición actual
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: Curves.easeInOut));
                     var offsetAnimation = animation.drive(tween);
 
                     return FadeTransition(
@@ -97,7 +104,8 @@ class _RegisterState extends State<Registerfour> {
                       ),
                     );
                   },
-                  pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      HomePage(),
                 ),
               );
             },

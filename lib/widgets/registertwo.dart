@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stcp/appbar.dart';
-import 'package:stcp/registerfour.dart';
+import 'package:stcp/widgets/appbar.dart';
+import 'package:stcp/widgets/registerthree.dart';
 
-class Registerthree extends StatefulWidget {
+class Registertwo extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Registerthree> {
+class _RegisterState extends State<Registertwo> {
   int _selectedIndex = 0; // Índice de la opción seleccionada
-  final String imageUrl = 'assets/images/reg3.png';
+  final String imageUrl = 'assets/images/reg2.png';
 
   Widget _buildHeader() {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height * 0.12, // Altura del 20% de la pantalla
+          height: MediaQuery.of(context).size.height *
+              0.12, // Altura del 20% de la pantalla
           child: Image.asset(imageUrl),
         ),
         Text(
-          'ELIJA UNA CONTRASEÑA',
+          'DATOS PERSONALES',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -31,7 +32,7 @@ class _RegisterState extends State<Registerthree> {
     );
   }
 
-  Widget _buildTextpassInput(String labelText) {
+  Widget _buildNumberInput(String labelText) {
     return Padding(
       padding: EdgeInsets.only(top: 40),
       child: TextField(
@@ -39,15 +40,36 @@ class _RegisterState extends State<Registerthree> {
           labelText: labelText,
           contentPadding: EdgeInsets.zero,
         ),
-        obscureText: true,
         style: TextStyle(
           fontSize: 18,
         ),
         cursorHeight: 25,
         cursorRadius: Radius.circular(2),
-        keyboardType: TextInputType.text, // Establecer el tipo de teclado a texto
+        keyboardType:
+            TextInputType.number, // Establecer el tipo de teclado a numérico
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      ),
+    );
+  }
+
+  Widget _buildTextInput(String labelText) {
+    return Padding(
+      padding: EdgeInsets.only(top: 40),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: labelText,
+          contentPadding: EdgeInsets.zero,
+        ),
+        style: TextStyle(
+          fontSize: 18,
+        ),
+        cursorHeight: 25,
+        cursorRadius: Radius.circular(2),
+        keyboardType:
+            TextInputType.text, // Establecer el tipo de teclado a texto
         inputFormatters: [
-          FilteringTextInputFormatter.singleLineFormatter // Permitir solo una línea de texto
+          FilteringTextInputFormatter
+              .singleLineFormatter // Permitir solo una línea de texto
         ],
       ),
     );
@@ -60,7 +82,8 @@ class _RegisterState extends State<Registerthree> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: const Header(title: 'REGISTRO - PASO 3', background: '#FF2D3E50', height: 56),
+        appBar: const Header(
+            title: 'REGISTRO - PASO 2', background: '#FF2D3E50', height: 56),
         body: ListView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -69,23 +92,10 @@ class _RegisterState extends State<Registerthree> {
               alignment: Alignment.center,
               child: _buildHeader(),
             ),
-            _buildTextpassInput('Contraseña'),
-            _buildTextpassInput('Confirmar contraseña'),
-            Container(
-              margin: EdgeInsets.only(top: 50),
-              child: Text(
-                '- 8 caracteres como mínimo.\n'
-                '- Al menos un carácter en minúscula.\n'
-                '- Al menos un carácter en mayúscula.\n'
-                '- Al menos un número.\n'
-                '- Al menos un carácter especial.\n',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFF6B6B6B),
-                ),
-                textAlign: TextAlign.justify,
-              ),
-            ),
+            _buildTextInput('Nombres Completos'),
+            _buildTextInput('Apellidos'),
+            _buildNumberInput('Celular'),
+            _buildTextInput('Correo electrónico'),
           ],
         ),
         bottomNavigationBar: Padding(
@@ -95,11 +105,16 @@ class _RegisterState extends State<Registerthree> {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  transitionDuration: Duration(milliseconds: 500), // Ajusta la duración de la transición
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    var begin = Offset(1.0, 0.0); // Inicio de la transición desde la derecha
-                    var end = Offset.zero; // Fin de la transición en la posición actual
-                    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: Curves.easeInOut));
+                  transitionDuration: Duration(
+                      milliseconds: 500), // Ajusta la duración de la transición
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    var begin = Offset(
+                        1.0, 0.0); // Inicio de la transición desde la derecha
+                    var end = Offset
+                        .zero; // Fin de la transición en la posición actual
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: Curves.easeInOut));
                     var offsetAnimation = animation.drive(tween);
 
                     return FadeTransition(
@@ -110,7 +125,8 @@ class _RegisterState extends State<Registerthree> {
                       ),
                     );
                   },
-                  pageBuilder: (context, animation, secondaryAnimation) => Registerfour(),
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      Registerthree(),
                 ),
               );
             },

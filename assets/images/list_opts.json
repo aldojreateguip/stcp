@@ -1,0 +1,41 @@
+{
+    "nombreApp" : "Componentes",
+    "rutas" : [
+        {
+            "ruta" : "alert",
+            "icon" : "add_alert",
+            "texto": "Alertas",
+            "descripcion": "Onli juans"
+        },
+        {
+            "ruta" : "avatar",
+            "icon" : "accessibility",
+            "texto": "Avatars",
+            "descripcion": "Onli juans2"
+        },
+        {
+            "ruta" : "card",
+            "icon" : "folder_open",
+            "texto": "Cards - Tarjetas",
+            "descripcion": "Onli juans3"
+        },
+        {
+            "ruta" : "inputs",
+            "icon" : "input",
+            "texto": "Inputs",
+            "descripcion": "Inputa Ejemplos"
+        },
+        {
+            "ruta" : "slider",
+            "icon" : "tune",
+            "texto": "Slider",
+            "descripcion": "Slider Ejemplitos"
+        },
+        {
+            "ruta" : "lista",
+            "icon" : "list",
+            "texto": "Listas",
+            "descripcion": "Listas Builder Ejemplitos"
+        }
+    ]
+}
