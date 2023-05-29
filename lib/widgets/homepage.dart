@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stcp/widgets/Login/body.dart';
-import 'package:stcp/widgets/Login/logo.dart';
 
 class HomePage extends StatelessWidget {
   @override

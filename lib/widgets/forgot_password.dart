@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:stcp/appbar.dart';
+import 'package:stcp/widgets/appbar.dart';
 
 class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector( 
+    return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: const Header(title: 'OLVIDÉ MI CONTRASEÑA', background: '#FF2D3E50', height: 56),
+        appBar: const Header(
+            title: 'OLVIDÉ MI CONTRASEÑA', background: '#FF2D3E50', height: 56),
         body: FractionallySizedBox(
           heightFactor: 1,
           widthFactor: 1,
