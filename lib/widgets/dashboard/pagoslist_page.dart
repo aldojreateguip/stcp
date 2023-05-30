@@ -71,6 +71,7 @@ class _PagosListPageState extends State<PagosListPage> {
       ),
     ];
 
+    // ignore: avoid_function_literals_in_foreach_calls
     data.forEach((opt) {
       final widgetTemp = ListTile(
         title: Text('CUOTA: ${opt['cuota']},  TOTAL: S/. ${opt['total']}'),

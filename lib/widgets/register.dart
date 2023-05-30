@@ -4,6 +4,8 @@ import 'package:stcp/widgets/appbar.dart';
 import 'package:stcp/widgets/registertwo.dart';
 
 class Register extends StatefulWidget {
+  const Register({super.key});
+
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -15,6 +17,7 @@ class _RegisterState extends State<Register> {
   Widget _buildHeader() {
     return Column(
       children: [
+        // ignore: sized_box_for_whitespace
         Container(
           height: MediaQuery.of(context).size.height *
               0.12, // Altura del 20% de la pantalla

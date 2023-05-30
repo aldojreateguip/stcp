@@ -8,34 +8,34 @@ class ConsultasPage extends StatefulWidget {
 }
 
 class _ConsultasPageState extends State<ConsultasPage> {
-  String _titulo = 'SISTEMA TRIBUTARIO DE CONSULTAS PÚBLICAS';
+  final String _titulo = 'SISTEMA TRIBUTARIO DE CONSULTAS PÚBLICAS';
   String? _anioSelected;
-  List<String> _anios = ['2017', '2018', '2019', '2020'];
+  final List<String> _anios = ['2017', '2018', '2019', '2020'];
   String? _cuotaSelected;
-  List<String> _cuotas = ['01', '02', '03', '04'];
+  final List<String> _cuotas = ['01', '02', '03', '04'];
   String? _tributoSelected;
-  List<String> _tributos = ['PREDIAL', 'NO PREDIAL'];
+  final List<String> _tributos = ['PREDIAL', 'NO PREDIAL'];
   String? _coactivoSelected;
-  List<String> _coactivo = ['SI', 'NO'];
+  final List<String> _coactivo = ['SI', 'NO'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Bienvenido, Usuario'),
-        backgroundColor: Color(0xFF0F7490),
+        title: const Text('Bienvenido, Usuario'),
+        backgroundColor: const Color(0xFF0F7490),
         actions: [
           Container(
-            margin: EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              child: Icon(Icons.logout),
+            margin: const EdgeInsets.only(right: 10.0),
+            child: const CircleAvatar(
               backgroundColor: Color(0xFF0F7490),
+              child: Icon(Icons.logout),
             ),
           )
         ],
       ),
       body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: ListView(
             children: [
               Column(
@@ -43,19 +43,19 @@ class _ConsultasPageState extends State<ConsultasPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 20.0),
                       child: Text(
                         _titulo,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 15.0),
-                      child: Text('Inicio de Consulta',
+                      child: const Text('Inicio de Consulta',
                           style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class _ConsultasPageState extends State<ConsultasPage> {
                           textAlign: TextAlign.center),
                     ),
                   ]),
-              SizedBox(
+              const SizedBox(
                 height: 25.0,
               ),
               _crearSearch(),
@@ -74,7 +74,7 @@ class _ConsultasPageState extends State<ConsultasPage> {
             ],
           )),
       bottomNavigationBar:
-          Container(padding: EdgeInsets.all(20.0), child: _crearBoton()),
+          Container(padding: const EdgeInsets.all(20.0), child: _crearBoton()),
     );
   }
 
@@ -85,7 +85,7 @@ class _ConsultasPageState extends State<ConsultasPage> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
         hintText: 'Buscar...',
         labelText: 'Buscar',
-        suffixIcon: Icon(Icons.search),
+        suffixIcon: const Icon(Icons.search),
       ),
       onChanged: (value) {
         setState(() {});
@@ -96,10 +96,11 @@ class _ConsultasPageState extends State<ConsultasPage> {
   List<DropdownMenuItem<String>> getOpcionesDrop() {
     List<DropdownMenuItem<String>> lista = [];
 
+    // ignore: avoid_function_literals_in_foreach_calls
     _anios.forEach((value) {
       lista.add(DropdownMenuItem(
-        child: Text(value),
         value: value,
+        child: Text(value),
       ));
     });
     return lista;
@@ -107,8 +108,8 @@ class _ConsultasPageState extends State<ConsultasPage> {
 
   Widget _crearDropdownAnio() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      margin: EdgeInsets.only(top: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+      margin: const EdgeInsets.only(top: 15.0),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
@@ -119,9 +120,9 @@ class _ConsultasPageState extends State<ConsultasPage> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
           borderRadius: BorderRadius.circular(16.0),
-          icon: Icon(null),
+          icon: const Icon(null),
           style: TextStyle(color: Colors.grey[800], fontSize: 15),
-          hint: Text('Seleccione año'),
+          hint: const Text('Seleccione año'),
           items: getOpcionesDrop(),
           value: _anioSelected,
           onChanged: (opt) {
@@ -137,10 +138,11 @@ class _ConsultasPageState extends State<ConsultasPage> {
   List<DropdownMenuItem<String>> getOpcionesCuotas() {
     List<DropdownMenuItem<String>> lista = [];
 
+    // ignore: avoid_function_literals_in_foreach_calls
     _cuotas.forEach((value) {
       lista.add(DropdownMenuItem(
-        child: Text(value),
         value: value,
+        child: Text(value),
       ));
     });
     return lista;
@@ -148,14 +150,21 @@ class _ConsultasPageState extends State<ConsultasPage> {
 
   Widget _crearDropdownCuota() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      margin: EdgeInsets.only(top: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+      margin: const EdgeInsets.only(top: 15.0),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+          width: 1.0,
+        ),
+        borderRadius: BorderRadius.circular(19.0),
+      ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
           borderRadius: BorderRadius.circular(16.0),
-          icon: Icon(null),
+          icon: const Icon(null),
           style: TextStyle(color: Colors.grey[800], fontSize: 15),
-          hint: Text('Seleccione Cuota'),
+          hint: const Text('Seleccione Cuota'),
           items: getOpcionesCuotas(),
           value: _cuotaSelected,
           onChanged: (opt) {
@@ -165,23 +174,17 @@ class _ConsultasPageState extends State<ConsultasPage> {
           },
         ),
       ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey,
-          width: 1.0,
-        ),
-        borderRadius: BorderRadius.circular(19.0),
-      ),
     );
   }
 
   List<DropdownMenuItem<String>> getOpcionesTributo() {
     List<DropdownMenuItem<String>> lista = [];
 
+    // ignore: avoid_function_literals_in_foreach_calls
     _tributos.forEach((value) {
       lista.add(DropdownMenuItem(
-        child: Text(value),
         value: value,
+        child: Text(value),
       ));
     });
     return lista;
@@ -189,14 +192,21 @@ class _ConsultasPageState extends State<ConsultasPage> {
 
   Widget _crearDropdownTributo() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      margin: EdgeInsets.only(top: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+      margin: const EdgeInsets.only(top: 15.0),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+          width: 1.0,
+        ),
+        borderRadius: BorderRadius.circular(19.0),
+      ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
           borderRadius: BorderRadius.circular(16.0),
-          icon: Icon(null),
+          icon: const Icon(null),
           style: TextStyle(color: Colors.grey[800], fontSize: 15),
-          hint: Text('Seleccione Tributo'),
+          hint: const Text('Seleccione Tributo'),
           items: getOpcionesTributo(),
           value: _tributoSelected,
           onChanged: (opt) {
@@ -206,23 +216,17 @@ class _ConsultasPageState extends State<ConsultasPage> {
           },
         ),
       ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey,
-          width: 1.0,
-        ),
-        borderRadius: BorderRadius.circular(19.0),
-      ),
     );
   }
 
   List<DropdownMenuItem<String>> getOpcionesCoactivo() {
     List<DropdownMenuItem<String>> lista = [];
 
+    // ignore: avoid_function_literals_in_foreach_calls
     _coactivo.forEach((value) {
       lista.add(DropdownMenuItem(
-        child: Text(value),
         value: value,
+        child: Text(value),
       ));
     });
     return lista;
@@ -230,14 +234,21 @@ class _ConsultasPageState extends State<ConsultasPage> {
 
   Widget _crearDropdownCoactivo() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      margin: EdgeInsets.only(top: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+      margin: const EdgeInsets.only(top: 15.0),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+          width: 1.0,
+        ),
+        borderRadius: BorderRadius.circular(19.0),
+      ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
           borderRadius: BorderRadius.circular(16.0),
-          icon: Icon(null),
+          icon: const Icon(null),
           style: TextStyle(color: Colors.grey[800], fontSize: 15),
-          hint: Text('Seleccione Coactivo'),
+          hint: const Text('Seleccione Coactivo'),
           items: getOpcionesCoactivo(),
           value: _coactivoSelected,
           onChanged: (opt) {
@@ -247,35 +258,29 @@ class _ConsultasPageState extends State<ConsultasPage> {
           },
         ),
       ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey,
-          width: 1.0,
-        ),
-        borderRadius: BorderRadius.circular(19.0),
-      ),
     );
   }
 
   Widget _crearBoton() {
+    // ignore: sized_box_for_whitespace
     return Container(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
           Navigator.pushNamed(context, 'listaConsulta');
         },
-        child: Text(
-          'GENERAR CONSULTA',
-          style: TextStyle(fontSize: 10),
-          textScaleFactor: 2,
-        ),
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),
-          backgroundColor: Color(0xFF2D3E50),
+          backgroundColor: const Color(0xFF2D3E50),
           foregroundColor: Colors.white,
+        ),
+        child: const Text(
+          'GENERAR CONSULTA',
+          style: TextStyle(fontSize: 10),
+          textScaleFactor: 2,
         ),
       ),
     );

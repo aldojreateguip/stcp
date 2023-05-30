@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stcp/widgets/appbar.dart';
 
 class ForgotPassword extends StatelessWidget {
+  const ForgotPassword({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,10 +19,10 @@ class ForgotPassword extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 50, left: 20, right: 20),
+                padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       'Por favor, ingrese el correo electrónico utilizado en su cuenta y le enviaremos un enlace para restablecer su contraseña.',
                       style: TextStyle(
@@ -51,23 +53,23 @@ class ForgotPassword extends StatelessWidget {
                 child: FractionallySizedBox(
                   widthFactor: 1,
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: ElevatedButton(
                       onPressed: () {
                         // Acción a realizar cuando se presione el botón
                       },
-                      child: Text(
-                        'ENVIAR',
-                        style: TextStyle(fontSize: 10),
-                        textScaleFactor: 2,
-                      ),
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        primary: Color(0xFF2D3E50),
-                        onPrimary: Colors.white,
+                        foregroundColor: Colors.white,
+                        backgroundColor: const Color(0xFF2D3E50),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
+                      ),
+                      child: const Text(
+                        'ENVIAR',
+                        style: TextStyle(fontSize: 10),
+                        textScaleFactor: 2,
                       ),
                     ),
                   ),

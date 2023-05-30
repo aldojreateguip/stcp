@@ -4,6 +4,7 @@ import '../forgot_password.dart';
 import '../register.dart';
 
 class LoginBody extends StatelessWidget {
+  const LoginBody({super.key});
   @override
   Widget build(BuildContext context) {
     const double bodyWidth = 1,
@@ -25,223 +26,219 @@ class LoginBody extends StatelessWidget {
         height: screenHeight,
         child: Align(
           alignment: Alignment.topCenter,
-          child: Container(
-            child: Column(
-              children: [
-                Container(
-                  height: imageHeight,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.elliptical(radiusX, radiusY),
-                      bottomLeft: Radius.elliptical(radiusX, radiusY),
-                    ),
-                    image: DecorationImage(
-                      image: AssetImage(imageUrl),
-                      fit: BoxFit.cover,
-                    ),
+          child: Column(
+            children: [
+              Container(
+                height: imageHeight,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.elliptical(radiusX, radiusY),
+                    bottomLeft: Radius.elliptical(radiusX, radiusY),
                   ),
-                  child: Opacity(
-                    opacity: 0.1,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: opacityColor,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.elliptical(radiusX, radiusY),
-                          bottomLeft: Radius.elliptical(radiusX, radiusY),
-                        ),
+                  image: DecorationImage(
+                    image: AssetImage(imageUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Opacity(
+                  opacity: 0.1,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: opacityColor,
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.elliptical(radiusX, radiusY),
+                        bottomLeft: Radius.elliptical(radiusX, radiusY),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: textMarginTop),
-                Text(
-                  textLogin,
-                  textScaleFactor: textScaleFactor,
+              ),
+              const SizedBox(height: textMarginTop),
+              const Text(
+                textLogin,
+                textScaleFactor: textScaleFactor,
+                style: TextStyle(
+                  fontSize: textFontSize,
+                  fontWeight: fontType,
+                  color: Colors.blueGrey,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Correo electrónico',
+                    contentPadding: EdgeInsets.zero,
+                  ),
                   style: TextStyle(
-                    fontSize: textFontSize,
-                    fontWeight: fontType,
-                    color: Colors.blueGrey,
+                    fontSize: 18,
                   ),
+                  cursorHeight: 25,
+                  cursorRadius: Radius.circular(2),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Correo electrónico',
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                    cursorHeight: 25,
-                    cursorRadius: Radius.circular(2),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Contraseña',
+                    contentPadding: EdgeInsets.zero,
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Contraseña',
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                    obscureText: true,
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                    cursorHeight: 25,
-                    cursorRadius: Radius.circular(2),
+                  obscureText: true,
+                  style: TextStyle(
+                    fontSize: 18,
                   ),
+                  cursorHeight: 25,
+                  cursorRadius: Radius.circular(2),
                 ),
-                Spacer(),
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(top: 20),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Acción a realizar cuando se presione el botón
-                      Navigator.pushNamed(context, 'consultas');
-                    },
-                    child: Text(
-                      'INGRESAR',
-                      style: TextStyle(fontSize: 10),
-                      textScaleFactor: 2,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12),
-                      primary: Color(0xFF2D3E50),
-                      onPrimary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
+              ),
+              const Spacer(),
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Acción a realizar cuando se presione el botón
+                    Navigator.pushNamed(context, 'consultas');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: const Color(0xFF2D3E50),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
                     ),
                   ),
+                  child: const Text(
+                    'INGRESAR',
+                    style: TextStyle(fontSize: 10),
+                    textScaleFactor: 2,
+                  ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 20),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 8),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                  transitionDuration: Duration(
-                                      milliseconds:
-                                          250), // Ajusta la duración de la transición
-                                  transitionsBuilder: (context, animation,
-                                      secondaryAnimation, child) {
-                                    var begin = Offset(0.0,
-                                        0.1); // Inicio de la transición desde la derecha
-                                    var end = Offset
-                                        .zero; // Fin de la transición en la posición actual
-                                    var tween = Tween(begin: begin, end: end)
-                                        .chain(CurveTween(
-                                            curve: Curves.easeInOut));
-                                    var offsetAnimation =
-                                        animation.drive(tween);
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                transitionDuration: const Duration(
+                                    milliseconds:
+                                        250), // Ajusta la duración de la transición
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  var begin = const Offset(0.0,
+                                      0.1); // Inicio de la transición desde la derecha
+                                  var end = Offset
+                                      .zero; // Fin de la transición en la posición actual
+                                  var tween = Tween(begin: begin, end: end)
+                                      .chain(
+                                          CurveTween(curve: Curves.easeInOut));
+                                  var offsetAnimation = animation.drive(tween);
 
-                                    return FadeTransition(
-                                      opacity:
-                                          animation, // Aplica el efecto de desvanecimiento
-                                      child: SlideTransition(
-                                        position: offsetAnimation,
-                                        child: child,
-                                      ),
-                                    );
-                                  },
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      Register(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              'REGÍSTRATE',
-                              style: TextStyle(fontSize: 13),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                side: BorderSide(
-                                  width: 3,
-                                  color: Colors.blueGrey,
-                                ),
+                                  return FadeTransition(
+                                    opacity:
+                                        animation, // Aplica el efecto de desvanecimiento
+                                    child: SlideTransition(
+                                      position: offsetAnimation,
+                                      child: child,
+                                    ),
+                                  );
+                                },
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        Register(),
                               ),
-                              primary: Colors.white,
-                              onPrimary: Colors.blueGrey,
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.blueGrey,
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              side: const BorderSide(
+                                width: 3,
+                                color: Colors.blueGrey,
+                              ),
                             ),
+                          ),
+                          child: const Text(
+                            'REGÍSTRATE',
+                            style: TextStyle(fontSize: 13),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 8),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                  transitionDuration: Duration(
-                                      milliseconds:
-                                          250), // Ajusta la duración de la transición
-                                  transitionsBuilder: (context, animation,
-                                      secondaryAnimation, child) {
-                                    var begin = Offset(0.0,
-                                        0.1); // Inicio de la transición desde la derecha
-                                    var end = Offset
-                                        .zero; // Fin de la transición en la posición actual
-                                    var tween = Tween(begin: begin, end: end)
-                                        .chain(CurveTween(
-                                            curve: Curves.easeInOut));
-                                    var offsetAnimation =
-                                        animation.drive(tween);
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                transitionDuration: const Duration(
+                                    milliseconds:
+                                        250), // Ajusta la duración de la transición
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  var begin = const Offset(0.0,
+                                      0.1); // Inicio de la transición desde la derecha
+                                  var end = Offset
+                                      .zero; // Fin de la transición en la posición actual
+                                  var tween = Tween(begin: begin, end: end)
+                                      .chain(
+                                          CurveTween(curve: Curves.easeInOut));
+                                  var offsetAnimation = animation.drive(tween);
 
-                                    return FadeTransition(
-                                      opacity:
-                                          animation, // Aplica el efecto de desvanecimiento
-                                      child: SlideTransition(
-                                        position: offsetAnimation,
-                                        child: child,
-                                      ),
-                                    );
-                                  },
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      ForgotPassword(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              'FORGOT PASSWORD',
-                              style: TextStyle(fontSize: 13),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                side: BorderSide(
-                                  width: 3,
-                                  color: Colors.blueGrey,
-                                ),
+                                  return FadeTransition(
+                                    opacity:
+                                        animation, // Aplica el efecto de desvanecimiento
+                                    child: SlideTransition(
+                                      position: offsetAnimation,
+                                      child: child,
+                                    ),
+                                  );
+                                },
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        const ForgotPassword(),
                               ),
-                              primary: Colors.white,
-                              onPrimary: Colors.blueGrey,
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.blueGrey,
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              side: const BorderSide(
+                                width: 3,
+                                color: Colors.blueGrey,
+                              ),
                             ),
+                          ),
+                          child: const Text(
+                            'FORGOT PASSWORD',
+                            style: TextStyle(fontSize: 13),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:stcp/main.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   const Header(
