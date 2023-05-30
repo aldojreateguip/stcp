@@ -156,7 +156,7 @@ class LoginBody extends StatelessWidget {
                                 },
                                 pageBuilder:
                                     (context, animation, secondaryAnimation) =>
-                                        Register(),
+                                        const Register(),
                               ),
                             );
                           },

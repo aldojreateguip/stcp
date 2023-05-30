@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:stcp/widgets/appbar.dart';
 
 import 'homepage.dart';
 
 class Registerfour extends StatefulWidget {
+  const Registerfour({super.key});
+
   @override
-  _RegisterState createState() => _RegisterState();
+  RegisterState createState() => RegisterState();
 }
 
-class _RegisterState extends State<Registerfour> {
-  int _selectedIndex = 0; // Índice de la opción seleccionada
+class RegisterState extends State<Registerfour> {
+// Índice de la opción seleccionada
   final String imageUrl = 'assets/images/reg4.png';
 
   Widget _buildHeader() {
     return Column(
       children: [
+        // ignore: sized_box_for_whitespace
         Container(
           height: MediaQuery.of(context).size.height *
               0.12, // Altura del 20% de la pantalla
           child: Image.asset(imageUrl),
         ),
-        Text(
+        const Text(
           '¡ESTAMOS CASI LISTOS!',
           style: TextStyle(
             fontSize: 20,
@@ -44,16 +46,16 @@ class _RegisterState extends State<Registerfour> {
             title: 'REGISTRO - PASO 4', background: '#FF2D3E50', height: 56),
         body: ListView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           children: [
             Align(
               alignment: Alignment.center,
               child: _buildHeader(),
             ),
             Container(
-              margin: EdgeInsets.only(top: 50),
+              margin: const EdgeInsets.only(top: 50),
               child: Column(
-                children: [
+                children: const [
                   Text(
                     'Esta acción requiere una verificación de correo. Por favor, revisa tu buzón de correo y sigue las instrucciones enviadas.\n\n'
                     'El mensaje de verificación se envió al siguiente correo:\n',
@@ -78,17 +80,17 @@ class _RegisterState extends State<Registerfour> {
           ],
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  transitionDuration: Duration(
+                  transitionDuration: const Duration(
                       milliseconds: 500), // Ajusta la duración de la transición
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) {
-                    var begin = Offset(
+                    var begin = const Offset(
                         0.0, 0.1); // Inicio de la transición desde la derecha
                     var end = Offset
                         .zero; // Fin de la transición en la posición actual
@@ -105,22 +107,22 @@ class _RegisterState extends State<Registerfour> {
                     );
                   },
                   pageBuilder: (context, animation, secondaryAnimation) =>
-                      HomePage(),
+                      const HomePage(),
                 ),
               );
             },
-            child: Text(
-              'FINALIZAR',
-              style: TextStyle(fontSize: 10),
-              textScaleFactor: 2,
-            ),
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              primary: Color(0xFF2D3E50),
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white,
+              backgroundColor: const Color(0xFF2D3E50),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25),
               ),
+            ),
+            child: const Text(
+              'FINALIZAR',
+              style: TextStyle(fontSize: 10),
+              textScaleFactor: 2,
             ),
           ),
         ),

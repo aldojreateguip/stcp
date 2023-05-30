@@ -4,23 +4,26 @@ import 'package:stcp/widgets/appbar.dart';
 import 'package:stcp/widgets/registerthree.dart';
 
 class Registertwo extends StatefulWidget {
+  const Registertwo({super.key});
+
   @override
-  _RegisterState createState() => _RegisterState();
+  RegisterState createState() => RegisterState();
 }
 
-class _RegisterState extends State<Registertwo> {
-  int _selectedIndex = 0; // Índice de la opción seleccionada
+class RegisterState extends State<Registertwo> {
+// Índice de la opción seleccionada
   final String imageUrl = 'assets/images/reg2.png';
 
   Widget _buildHeader() {
     return Column(
       children: [
+        // ignore: sized_box_for_whitespace
         Container(
           height: MediaQuery.of(context).size.height *
               0.12, // Altura del 20% de la pantalla
           child: Image.asset(imageUrl),
         ),
-        Text(
+        const Text(
           'DATOS PERSONALES',
           style: TextStyle(
             fontSize: 20,
@@ -34,17 +37,17 @@ class _RegisterState extends State<Registertwo> {
 
   Widget _buildNumberInput(String labelText) {
     return Padding(
-      padding: EdgeInsets.only(top: 40),
+      padding: const EdgeInsets.only(top: 40),
       child: TextField(
         decoration: InputDecoration(
           labelText: labelText,
           contentPadding: EdgeInsets.zero,
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
         ),
         cursorHeight: 25,
-        cursorRadius: Radius.circular(2),
+        cursorRadius: const Radius.circular(2),
         keyboardType:
             TextInputType.number, // Establecer el tipo de teclado a numérico
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -54,17 +57,17 @@ class _RegisterState extends State<Registertwo> {
 
   Widget _buildTextInput(String labelText) {
     return Padding(
-      padding: EdgeInsets.only(top: 40),
+      padding: const EdgeInsets.only(top: 40),
       child: TextField(
         decoration: InputDecoration(
           labelText: labelText,
           contentPadding: EdgeInsets.zero,
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
         ),
         cursorHeight: 25,
-        cursorRadius: Radius.circular(2),
+        cursorRadius: const Radius.circular(2),
         keyboardType:
             TextInputType.text, // Establecer el tipo de teclado a texto
         inputFormatters: [
@@ -86,7 +89,7 @@ class _RegisterState extends State<Registertwo> {
             title: 'REGISTRO - PASO 2', background: '#FF2D3E50', height: 56),
         body: ListView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           children: [
             Align(
               alignment: Alignment.center,
@@ -99,17 +102,17 @@ class _RegisterState extends State<Registertwo> {
           ],
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  transitionDuration: Duration(
+                  transitionDuration: const Duration(
                       milliseconds: 500), // Ajusta la duración de la transición
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) {
-                    var begin = Offset(
+                    var begin = const Offset(
                         1.0, 0.0); // Inicio de la transición desde la derecha
                     var end = Offset
                         .zero; // Fin de la transición en la posición actual
@@ -126,22 +129,22 @@ class _RegisterState extends State<Registertwo> {
                     );
                   },
                   pageBuilder: (context, animation, secondaryAnimation) =>
-                      Registerthree(),
+                      const Registerthree(),
                 ),
               );
             },
-            child: Text(
-              'CONTINUAR',
-              style: TextStyle(fontSize: 10),
-              textScaleFactor: 2,
-            ),
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              primary: Color(0xFF2D3E50),
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white,
+              backgroundColor: const Color(0xFF2D3E50),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25),
               ),
+            ),
+            child: const Text(
+              'CONTINUAR',
+              style: TextStyle(fontSize: 10),
+              textScaleFactor: 2,
             ),
           ),
         ),
