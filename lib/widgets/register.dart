@@ -102,7 +102,7 @@ class RegisterState extends State<Register> {
                           fontWeight: FontWeight.bold,
                           color: _selectedIndex == 0
                               ? Colors.white
-                              : Colors.transparent,
+                              : const Color.fromARGB(115, 103, 103, 103),
                         ),
                       ),
                     ),
@@ -141,7 +141,7 @@ class RegisterState extends State<Register> {
                           fontWeight: FontWeight.bold,
                           color: _selectedIndex == 1
                               ? Colors.white
-                              : Colors.transparent,
+                              : const Color.fromARGB(115, 103, 103, 103),
                         ),
                       ),
                     ),

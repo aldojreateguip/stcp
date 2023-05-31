@@ -229,7 +229,7 @@ class LoginBody extends StatelessWidget {
                             ),
                           ),
                           child: const Text(
-                            'FORGOT PASSWORD',
+                            'RECUPERAR CLAVE',
                             style: TextStyle(fontSize: 13),
                           ),
                         ),
