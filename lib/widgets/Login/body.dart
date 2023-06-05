@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stcp/widgets/Login/providers/auth_providers.dart';
 import 'package:stcp/widgets/Login/providers/login_form_providers.dart';
 
 import '../forgot_password.dart';
@@ -7,9 +8,19 @@ import '../register.dart';
 
 class LoginBody extends ConsumerWidget {
   const LoginBody({super.key});
+  void showSanckbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loginForm = ref.watch(loginFormProvider);
+    ref.listen(authProvider, (previous, next) {
+      if (next.errorMessage.isEmpty) return;
+      showSanckbar(context, next.errorMessage);
+    });
 
     const double bodyWidth = 1,
         textMarginTop = 20,

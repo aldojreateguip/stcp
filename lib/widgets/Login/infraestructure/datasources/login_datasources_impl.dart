@@ -24,8 +24,17 @@ class LoginDataSourceImpl extends LoginDataSource {
       // final user = UserMapper.userJsonToEntity(response.data);
       final user = UserMapper.userJsonToEntity(response.data);
       return user;
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 401) {
+        throw CustomError('Credenciales Incorrectas');
+      }
+      if (e.type == DioErrorType.connectionTimeout) {
+        throw CustomError('Error de conexión');
+      }
+
+      throw Exception();
     } catch (e) {
-      throw WrongCredentials();
+      throw Exception();
     }
   }
 
