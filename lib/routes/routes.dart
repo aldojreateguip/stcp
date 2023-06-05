@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stcp/widgets/homepage.dart';
 import 'package:stcp/widgets/dashboard/pagoslist_page.dart';
 import 'package:stcp/widgets/dashboard/consultas_page.dart';
-import 'package:stcp/widgets/dashboard/detallepago_page.dart';
+import 'package:stcp/widgets/dashboard/detalle_pago_page.dart';
 
 Map<String, WidgetBuilder> getAplicattionsRoutes() {
   return <String, WidgetBuilder>{
