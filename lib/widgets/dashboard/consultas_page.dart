@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ConsultasPage extends StatefulWidget {
   const ConsultasPage({super.key});
@@ -10,9 +11,22 @@ class ConsultasPage extends StatefulWidget {
 class _ConsultasPageState extends State<ConsultasPage> {
   final String _titulo = 'SISTEMA TRIBUTARIO DE CONSULTAS PÚBLICAS';
   String? _anioSelected;
-  final List<String> _anios = ['2017', '2018', '2019', '2020'];
+  final List<String> _anios = [];
   String? _cuotaSelected;
-  final List<String> _cuotas = ['01', '02', '03', '04'];
+  final List<String> _cuotas = [
+    '001',
+    '002',
+    '003',
+    '004',
+    '005',
+    '006',
+    '007',
+    '008',
+    '009',
+    '010',
+    '011',
+    '012'
+  ];
   String? _tributoSelected;
   final List<String> _tributos = ['PREDIAL', 'NO PREDIAL'];
   String? _coactivoSelected;
@@ -66,7 +80,7 @@ class _ConsultasPageState extends State<ConsultasPage> {
               const SizedBox(
                 height: 25.0,
               ),
-              _crearSearch(),
+              // _crearSearch(),
               _crearDropdownAnio(),
               _crearDropdownCuota(),
               _crearDropdownTributo(),
@@ -151,7 +165,7 @@ class _ConsultasPageState extends State<ConsultasPage> {
   Widget _crearDropdownCuota() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      margin: const EdgeInsets.only(top: 15.0),
+      margin: const EdgeInsets.only(top: 20.0),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
@@ -193,7 +207,7 @@ class _ConsultasPageState extends State<ConsultasPage> {
   Widget _crearDropdownTributo() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      margin: const EdgeInsets.only(top: 15.0),
+      margin: const EdgeInsets.only(top: 20.0),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
@@ -235,7 +249,7 @@ class _ConsultasPageState extends State<ConsultasPage> {
   Widget _crearDropdownCoactivo() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-      margin: const EdgeInsets.only(top: 15.0),
+      margin: const EdgeInsets.only(top: 20.0),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
@@ -267,7 +281,7 @@ class _ConsultasPageState extends State<ConsultasPage> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushNamed(context, 'listaConsulta');
+          context.push('/listaConsulta');
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stcp/providers/menu_provider.dart';
 
 class PagosListPage extends StatefulWidget {
@@ -86,7 +87,7 @@ class _PagosListPageState extends State<PagosListPage> {
           color: Colors.cyan[400],
         ),
         onTap: () {
-          Navigator.pushNamed(context, 'detallePago');
+          context.push('/detallePago');
         },
       );
       opciones
