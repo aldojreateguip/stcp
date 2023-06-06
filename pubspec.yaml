@@ -53,8 +53,11 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/ic_muni.png"
+  image_path: "assets/icon/muni_pay.png"
   min_sdk_android: 21
+  remove_alpha_ios: true
+  adaptive_icon_background: "#AAFFBF00"
+  adaptive_icon_foreground: "assets/icon/muni_pay_round.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
