@@ -1,15 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stcp/widgets/shared/services/key_value_storage.dart';
+import 'package:stcp/widgets/shared/services/key_value_storage_impl.dart';
 import '../infraestructure/infrasestructure.dart';
 import '../domain/domain.dart';
 
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   final authRepository = LoginRespositoryImpl();
-  return AuthNotifier(authRepository: authRepository);
+  final keyValueStorageService = KeyValueStorageServiceImpl();
+  return AuthNotifier(
+    authRepository: authRepository,
+    keyValueStorageService: keyValueStorageService,
+  );
 });
 
 class AuthNotifier extends StateNotifier<AuthState> {
   final LoginRepository authRepository;
-  AuthNotifier({required this.authRepository}) : super(AuthState());
+  final KeyValueStorageService keyValueStorageService;
+  AuthNotifier({
+    required this.authRepository,
+    required this.keyValueStorageService,
+  }) : super(AuthState());
 
   Future<void> loginUser(String email, String password) async {
     await Future.delayed(const Duration(milliseconds: 500));
@@ -26,13 +36,28 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   void registerUser(String email, String password) async {}
-  void checkAuthStatus() async {}
-  void _setLoggedUser(User user) {
+  void checkAuthStatus() async {
+    final token = await keyValueStorageService.getValue<String>('token');
+    // final refreshtoken = await keyValueStorageService.getValue('refreshtoken');
+    if (token == null) return logout();
+    try {
+      final user = await authRepository.checkStatusLogin(token);
+      _setLoggedUser(user);
+    } catch (e) {
+      logout();
+    }
+  }
+
+  void _setLoggedUser(User user) async {
+    // await keyValueStorageService.setKeyValue('token', user.token);
+    // await keyValueStorageService.setKeyValue('refreshtoken', user.refreshtoken);
     state = state.copyWith(
         user: user, authStatus: AuthStatus.authenticated, errorMessage: '');
   }
 
   Future<void> logout([String? errorMessage]) async {
+    // await keyValueStorageService.removeKey('token');
+    // await keyValueStorageService.removeKey('refreshtoken');
     state = state.copyWith(
       authStatus: AuthStatus.notAuthenticated,
       user: null,
