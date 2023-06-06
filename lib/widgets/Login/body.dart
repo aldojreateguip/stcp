@@ -130,6 +130,8 @@ class LoginBody extends ConsumerWidget {
                     cursorRadius: const Radius.circular(2),
                     onChanged:
                         ref.read(loginFormProvider.notifier).onPasswordChange,
+                    onSubmitted: (_) =>
+                        ref.read(loginFormProvider.notifier).onFormSubmit(),
                   ),
                 ),
                 const Spacer(),

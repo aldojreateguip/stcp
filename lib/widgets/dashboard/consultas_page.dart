@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stcp/widgets/Login/providers/auth_providers.dart';
 
-class ConsultasPage extends StatefulWidget {
+class ConsultasPage extends ConsumerStatefulWidget {
   const ConsultasPage({super.key});
 
   @override
-  State<ConsultasPage> createState() => _ConsultasPageState();
+  ConsultasPageState createState() => ConsultasPageState();
 }
 
-class _ConsultasPageState extends State<ConsultasPage> {
+class ConsultasPageState extends ConsumerState<ConsultasPage> {
   final String _titulo = 'SISTEMA TRIBUTARIO DE CONSULTAS PÚBLICAS';
   String? _anioSelected;
   final List<String> _anios = [];
@@ -41,9 +43,11 @@ class _ConsultasPageState extends State<ConsultasPage> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10.0),
-            child: const CircleAvatar(
-              backgroundColor: Color(0xFF0F7490),
-              child: Icon(Icons.logout),
+            child: IconButton(
+              onPressed: () {
+                ref.read(authProvider.notifier).logout();
+              },
+              icon: const Icon(Icons.logout),
             ),
           )
         ],

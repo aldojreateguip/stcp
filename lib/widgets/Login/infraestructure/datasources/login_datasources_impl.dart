@@ -8,9 +8,25 @@ class LoginDataSourceImpl extends LoginDataSource {
     baseUrl: Environment.apiUrl,
   ));
   @override
-  Future<User> checkStatusLogin(String token) {
-    // TODO: implement checkStatusLogin
+  Future<User> checkStatusLogin(String token) async {
     throw UnimplementedError();
+    // TODO: implement checkStatus
+    // try {
+    //   final response = await dio.get(
+    //       'login/check-status', //Posible_enlace para validar token
+    //       options: Options(headers: {
+    //         'Authorization': 'Bearer $token',
+    //       }));
+    //   final user = UserMapper.userJsonToEntity(response.data);
+    //   return user;
+    // } on DioError catch (e) {
+    //   if (e.response?.statusCode == 401) {
+    //     throw CustomError('Token incorrecto');
+    //   }
+    //   throw Exception();
+    // } catch (e) {
+    //   throw Exception();
+    // }
   }
 
   @override
