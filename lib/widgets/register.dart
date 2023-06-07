@@ -11,8 +11,8 @@ class Register extends StatefulWidget {
 }
 
 class RegisterState extends State<Register> {
-  int _selectedIndex = 0; // Índice de la opción seleccionada
-  final String imageUrl = 'assets/images/reg1.png';
+// Índice de la opción seleccionada
+  final String imageUrl = 'assets/images/reg2.png';
 
   Widget _buildHeader() {
     return Column(
@@ -24,138 +24,18 @@ class RegisterState extends State<Register> {
           child: Image.asset(imageUrl),
         ),
         const Text(
-          'IDENTIDAD',
+          'DATOS PERSONALES',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Color(0xFF6B6B6B),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 30), // Margen inferior de 50
-        ),
       ],
     );
   }
 
-  Widget _buildDocumentTypeSelector() {
-    return Row(
-      children: [
-        const Text(
-          'Tipo de Documento',
-          style: TextStyle(
-            fontSize: 18,
-            color: Color(0xFF6B6B6B),
-          ),
-        ),
-        const SizedBox(width: 10),
-        Container(
-          width: MediaQuery.of(context).size.width *
-              0.42, // 40% del ancho disponible
-          alignment: Alignment.centerRight,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12.withOpacity(0.25),
-                offset: const Offset(0, 1),
-                blurRadius: 2,
-                spreadRadius: 0,
-              ),
-            ],
-            border: Border.all(
-              color: const Color.fromRGBO(235, 235, 235, 1),
-              width: 5,
-            ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => setState(() => _selectedIndex = 0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      gradient: _selectedIndex == 0
-                          ? const LinearGradient(
-                              colors: [Color(0xFF1A8CAB), Color(0xFF0F7490)],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            )
-                          : null,
-                      boxShadow: _selectedIndex == 0
-                          ? [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.20),
-                                offset: const Offset(0, 4),
-                                blurRadius: 4,
-                              ),
-                            ]
-                          : null,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'DNI',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: _selectedIndex == 0
-                              ? Colors.white
-                              : const Color.fromARGB(115, 103, 103, 103),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => setState(() => _selectedIndex = 1),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      gradient: _selectedIndex == 1
-                          ? const LinearGradient(
-                              colors: [Color(0xFF1A8CAB), Color(0xFF0F7490)],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            )
-                          : null,
-                      boxShadow: _selectedIndex == 1
-                          ? [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.20),
-                                offset: const Offset(0, 4),
-                                blurRadius: 4,
-                              ),
-                            ]
-                          : null,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'RUC',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: _selectedIndex == 1
-                              ? Colors.white
-                              : const Color.fromARGB(115, 103, 103, 103),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildNumberInput(String labelText) {
+  Widget _buildTextInput(String labelText) {
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: TextField(
@@ -169,8 +49,11 @@ class RegisterState extends State<Register> {
         cursorHeight: 25,
         cursorRadius: const Radius.circular(2),
         keyboardType:
-            TextInputType.number, // Establecer el tipo de teclado a numérico
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            TextInputType.text, // Establecer el tipo de teclado a texto
+        inputFormatters: [
+          FilteringTextInputFormatter
+              .singleLineFormatter // Permitir solo una línea de texto
+        ],
       ),
     );
   }
@@ -192,9 +75,9 @@ class RegisterState extends State<Register> {
               alignment: Alignment.center,
               child: _buildHeader(),
             ),
-            _buildDocumentTypeSelector(),
-            _buildNumberInput('Número de Documento'),
-            _buildNumberInput('Código de Contribuyente*'),
+            _buildTextInput('Nombres Completos'),
+            _buildTextInput('Apellidos'),
+            _buildTextInput('Correo electrónico'),
           ],
         ),
         bottomNavigationBar: Padding(
