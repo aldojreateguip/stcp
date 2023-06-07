@@ -1,4 +1,3 @@
-
 import 'package:formz/formz.dart';
 
 // Define input validation errors
@@ -22,6 +21,7 @@ class Password extends FormzInput<String, PasswordError> {
     if (displayError == PasswordError.empty) return 'El campo es requerido';
     if (displayError == PasswordError.length) return 'Mínimo 6 caracteres';
     if (displayError == PasswordError.format)
+      // ignore: curly_braces_in_flow_control_structures
       return 'Debe de tener Mayúscula, letras y un número';
 
     return null;

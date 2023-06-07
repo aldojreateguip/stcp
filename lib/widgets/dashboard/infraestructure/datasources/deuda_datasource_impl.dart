@@ -24,7 +24,7 @@ class DeudaDatasourceImpl extends DeudaDatasource {
   @override
   Future<List<Deuda>> getDeudasByPage(String contribuyente, String? year,
       String? cuota, String? tributo, String? coactivo) async {
-    final response = await dio.post('/consultas', data: {
+    final response = await dio.post<List>('/consultas', data: {
       'contribuyente': contribuyente,
       'year': year,
       'cuota': cuota,

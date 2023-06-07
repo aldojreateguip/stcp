@@ -1,20 +1,17 @@
-import 'package:stcp/widgets/Login/domain/domain.dart';
-
 class Deuda {
-  String id;
+  String idDeuda;
   String anio;
   String cuota;
   String descripcion;
   String fase;
   String fechaVence;
-  double insoluto;
-  double interes;
-  double gastos;
-  double total;
-  User user;
+  String insoluto;
+  String interes;
+  String gastos;
+  String total;
 
   Deuda({
-    required this.id,
+    required this.idDeuda,
     required this.anio,
     required this.cuota,
     required this.descripcion,
@@ -24,6 +21,5 @@ class Deuda {
     required this.interes,
     required this.gastos,
     required this.total,
-    required this.user,
   });
 }

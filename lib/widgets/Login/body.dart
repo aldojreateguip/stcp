@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stcp/widgets/Login/providers/auth_providers.dart';
 import 'package:stcp/widgets/Login/providers/login_form_providers.dart';
 
-import '../forgot_password.dart';
 import '../register.dart';
 
 class LoginBody extends ConsumerWidget {
@@ -161,7 +160,7 @@ class LoginBody extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 20, top: 10),
+                  margin: const EdgeInsets.only(bottom: 20, top: 10),
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -182,10 +181,9 @@ class LoginBody extends ConsumerWidget {
                                   var end = Offset
                                       .zero; // Fin de la transición en la posición actual
                                   var tween = Tween(begin: begin, end: end)
-                                      .chain(CurveTween(
-                                          curve: Curves.easeInOut));
-                                  var offsetAnimation =
-                                      animation.drive(tween);
+                                      .chain(
+                                          CurveTween(curve: Curves.easeInOut));
+                                  var offsetAnimation = animation.drive(tween);
 
                                   return FadeTransition(
                                     opacity:
@@ -196,9 +194,9 @@ class LoginBody extends ConsumerWidget {
                                     ),
                                   );
                                 },
-                                pageBuilder: (context, animation,
-                                        secondaryAnimation) =>
-                                    const Register(),
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        const Register(),
                               ),
                             );
                           },

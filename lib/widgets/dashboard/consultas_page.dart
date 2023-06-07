@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/Login/providers/auth_providers.dart';
+import 'infraestructure/infraestructure.dart';
 
 class ConsultasPage extends ConsumerStatefulWidget {
   const ConsultasPage({super.key});
@@ -12,9 +13,9 @@ class ConsultasPage extends ConsumerStatefulWidget {
 
 class ConsultasPageState extends ConsumerState<ConsultasPage> {
   final String _titulo = 'SISTEMA TRIBUTARIO DE CONSULTAS PÚBLICAS';
-  String? _anioSelected;
-  final List<String> _anios = [];
-  String? _cuotaSelected;
+  String? anioSelected = '';
+
+  String? cuotaSelected = '';
   final List<String> _cuotas = [
     '001',
     '002',
@@ -29,12 +30,15 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
     '011',
     '012'
   ];
-  String? _tributoSelected;
-  final List<String> _tributos = ['PREDIAL', 'NO PREDIAL'];
-  String? _coactivoSelected;
+  String? tributoSelected = '';
+
+  String? coactivoSelected = '';
   final List<String> _coactivo = ['SI', 'NO'];
+  String codContribuyente = '';
   @override
   Widget build(BuildContext context) {
+    final filtros = ref.watch(authProvider).user;
+    codContribuyente = filtros!.id;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -85,9 +89,10 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
                 height: 25.0,
               ),
               // _crearSearch(),
-              _crearDropdownAnio(),
+
+              _crearDropdownAnio(filtros.years),
               _crearDropdownCuota(),
-              _crearDropdownTributo(),
+              _crearDropdownTributo(filtros.tributes),
               _crearDropdownCoactivo(),
             ],
           )),
@@ -111,11 +116,13 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
     );
   }
 
-  List<DropdownMenuItem<String>> getOpcionesDrop() {
-    List<DropdownMenuItem<String>> lista = [];
+  List<DropdownMenuItem<String>> getOpcionesDrop(List list) {
+    List<DropdownMenuItem<String>> lista = [
+      const DropdownMenuItem(value: '', child: Text('Seleecione año'))
+    ];
 
     // ignore: avoid_function_literals_in_foreach_calls
-    _anios.forEach((value) {
+    list.forEach((value) {
       lista.add(DropdownMenuItem(
         value: value,
         child: Text(value),
@@ -124,7 +131,7 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
     return lista;
   }
 
-  Widget _crearDropdownAnio() {
+  Widget _crearDropdownAnio(anio) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
       margin: const EdgeInsets.only(top: 15.0),
@@ -141,11 +148,11 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
           icon: const Icon(null),
           style: TextStyle(color: Colors.grey[800], fontSize: 15),
           hint: const Text('Seleccione año'),
-          items: getOpcionesDrop(),
-          value: _anioSelected,
+          items: getOpcionesDrop(anio),
+          value: anioSelected,
           onChanged: (opt) {
             setState(() {
-              _anioSelected = opt;
+              anioSelected = opt;
             });
           },
         ),
@@ -154,7 +161,9 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
   }
 
   List<DropdownMenuItem<String>> getOpcionesCuotas() {
-    List<DropdownMenuItem<String>> lista = [];
+    List<DropdownMenuItem<String>> lista = [
+      const DropdownMenuItem(value: '', child: Text('Seleecione Cuota'))
+    ];
 
     // ignore: avoid_function_literals_in_foreach_calls
     _cuotas.forEach((value) {
@@ -184,10 +193,10 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
           style: TextStyle(color: Colors.grey[800], fontSize: 15),
           hint: const Text('Seleccione Cuota'),
           items: getOpcionesCuotas(),
-          value: _cuotaSelected,
+          value: cuotaSelected,
           onChanged: (opt) {
             setState(() {
-              _cuotaSelected = opt;
+              cuotaSelected = opt;
             });
           },
         ),
@@ -195,11 +204,13 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
     );
   }
 
-  List<DropdownMenuItem<String>> getOpcionesTributo() {
-    List<DropdownMenuItem<String>> lista = [];
+  List<DropdownMenuItem<String>> getOpcionesTributo(List trib) {
+    List<DropdownMenuItem<String>> lista = [
+      const DropdownMenuItem(value: '', child: Text('Seleecione Tributo'))
+    ];
 
     // ignore: avoid_function_literals_in_foreach_calls
-    _tributos.forEach((value) {
+    trib.forEach((value) {
       lista.add(DropdownMenuItem(
         value: value,
         child: Text(value),
@@ -208,7 +219,7 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
     return lista;
   }
 
-  Widget _crearDropdownTributo() {
+  Widget _crearDropdownTributo(tribute) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
       margin: const EdgeInsets.only(top: 20.0),
@@ -225,11 +236,11 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
           icon: const Icon(null),
           style: TextStyle(color: Colors.grey[800], fontSize: 15),
           hint: const Text('Seleccione Tributo'),
-          items: getOpcionesTributo(),
-          value: _tributoSelected,
+          items: getOpcionesTributo(tribute),
+          value: tributoSelected,
           onChanged: (opt) {
             setState(() {
-              _tributoSelected = opt;
+              tributoSelected = opt;
             });
           },
         ),
@@ -238,7 +249,9 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
   }
 
   List<DropdownMenuItem<String>> getOpcionesCoactivo() {
-    List<DropdownMenuItem<String>> lista = [];
+    List<DropdownMenuItem<String>> lista = [
+      const DropdownMenuItem(value: '', child: Text('Seleecione Coactivo'))
+    ];
 
     // ignore: avoid_function_literals_in_foreach_calls
     _coactivo.forEach((value) {
@@ -268,10 +281,10 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
           style: TextStyle(color: Colors.grey[800], fontSize: 15),
           hint: const Text('Seleccione Coactivo'),
           items: getOpcionesCoactivo(),
-          value: _coactivoSelected,
+          value: coactivoSelected,
           onChanged: (opt) {
             setState(() {
-              _coactivoSelected = opt;
+              coactivoSelected = opt;
             });
           },
         ),
@@ -285,6 +298,9 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
+          DeudaDatasourceImpl().getDeudasByPage(codContribuyente, anioSelected,
+              cuotaSelected, tributoSelected, coactivoSelected);
+
           context.push('/listaConsulta');
         },
         style: ElevatedButton.styleFrom(
