@@ -6,7 +6,7 @@ import 'package:stcp/widgets/dashboard/detalle_pago_page.dart';
 
 // GoRouter configuration
 final appRouter = GoRouter(
-  initialLocation: '/consultas',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
