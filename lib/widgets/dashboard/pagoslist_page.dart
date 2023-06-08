@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stcp/providers/menu_provider.dart';
+import 'package:stcp/widgets/dashboard/providers/deudas_provider.dart';
 
-class PagosListPage extends StatefulWidget {
+class PagosListPage extends ConsumerStatefulWidget {
   const PagosListPage({super.key});
 
   @override
-  State<PagosListPage> createState() => _PagosListPageState();
+  PagosListPageState createState() => PagosListPageState();
 }
 
-class _PagosListPageState extends State<PagosListPage> {
+class PagosListPageState extends ConsumerState {
   final _titulo = 'Bienvenido, Usuario';
   final _colorMuni = const Color(0xFF0F7490);
 
   @override
   Widget build(BuildContext context) {
+    final deudasState = ref.watch(deudasProvider);
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
@@ -32,22 +35,48 @@ class _PagosListPageState extends State<PagosListPage> {
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: _lista(),
+        child: ListView.builder(
+          itemCount: deudasState.deudas.length,
+          itemBuilder: (BuildContext context, int index) {
+            final item = deudasState.deudas[index];
+            return ListTile(
+              title: Text('CUOTA: ${item.cuota},  TOTAL: S/. ${item.total}'),
+              subtitle: Text('${item.descripcion}, ${item.anio}, ${item.fase}'
+                  .toUpperCase()), //el metodo getIcon no es tan necesario, solo es un forma de llamar un icono desde un json
+              trailing: Icon(
+                Icons.arrow_forward_ios_outlined,
+                color: Colors.cyan[400],
+              ),
+              onTap: () {
+                context.push('/detallePago');
+              },
+            );
+            ;
+          },
+        ),
       ),
     );
   }
 
-  Widget _lista() {
+  Widget _lista(List<dynamic>? data) {
     // menuProvider.cargarData;
-    return FutureBuilder(
-      future: menuProvider.cargarData(),
-      // initialData: [],
-      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-        return ListView(
-          children: _listItems(snapshot.data ?? [], context),
-        );
-      },
-    );
+    // return FutureBuilder(
+    //   // future: menuProvider.cargarData(),
+    //   // initialData: [],//ya estaba comentado
+    //   builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+
+    //   },
+    // );
+
+    if (data!.isEmpty) {
+      return const Center(
+        child: Text('No se encontraron datos'),
+      );
+    } else {
+      return ListView(
+        children: _listItems(data, context),
+      );
+    }
   }
 
   List<Widget> _listItems(List<dynamic> data, BuildContext context) {
