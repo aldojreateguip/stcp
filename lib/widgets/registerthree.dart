@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/appbar.dart';
 import 'package:stcp/widgets/registerfour.dart';
 
 class Registerthree extends StatefulWidget {
-  const Registerthree({super.key});
+  const Registerthree({Key? key}) : super(key: key);
+
   @override
   RegisterState createState() => RegisterState();
 }
 
 class RegisterState extends State<Registerthree> {
-// Índice de la opción seleccionada
   final String imageUrl = 'assets/images/reg3.png';
+  ValueNotifier<bool> _obscurePassword1 = ValueNotifier<bool>(true); // Variable para controlar si se muestra o no la contraseña 1
+  ValueNotifier<bool> _obscurePassword2 = ValueNotifier<bool>(true); // Variable para controlar si se muestra o no la contraseña 2
+  TextEditingController _passwordController1 = TextEditingController(); // Controlador del campo de texto de la contraseña 1
+  TextEditingController _passwordController2 = TextEditingController(); // Controlador del campo de texto de la contraseña 2
 
   Widget _buildHeader() {
     return Column(
@@ -34,28 +39,52 @@ class RegisterState extends State<Registerthree> {
     );
   }
 
-  Widget _buildTextpassInput(String labelText) {
+  Widget _buildTextpassInput(
+    String labelText,
+    TextEditingController passwordController,
+    ValueNotifier<bool> obscurePassword,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(top: 40),
-      child: TextField(
-        decoration: InputDecoration(
-          labelText: labelText,
-          contentPadding: EdgeInsets.zero,
-        ),
-        obscureText: true,
-        style: const TextStyle(
-          fontSize: 18,
-        ),
-        cursorHeight: 25,
-        cursorRadius: const Radius.circular(2),
-        keyboardType:
-            TextInputType.text, // Establecer el tipo de teclado a texto
-        inputFormatters: [
-          FilteringTextInputFormatter
-              .singleLineFormatter // Permitir solo una línea de texto
-        ],
+      child: ValueListenableBuilder<bool>(
+        valueListenable: obscurePassword,
+        builder: (context, value, child) {
+          return TextField(
+            controller: passwordController,
+            decoration: InputDecoration(
+              labelText: labelText,
+              contentPadding: EdgeInsets.zero,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  value ? Icons.visibility_off : Icons.visibility,
+                  color: const Color(0xFF6B6B6B),
+                ),
+                onPressed: () {
+                  obscurePassword.value = !obscurePassword.value; // Alternar el valor del ValueNotifier
+                },
+              ),
+            ),
+            obscureText: value,
+            style: const TextStyle(
+              fontSize: 18,
+            ),
+            cursorHeight: 25,
+            cursorRadius: const Radius.circular(2),
+            keyboardType: TextInputType.text,
+            inputFormatters: [
+              FilteringTextInputFormatter.singleLineFormatter,
+            ],
+          );
+        },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _passwordController1.dispose(); // Liberar el controlador de la contraseña 1 al finalizar
+    _passwordController2.dispose(); // Liberar el controlador de la contraseña 2 al finalizar
+    super.dispose();
   }
 
   @override
@@ -65,8 +94,7 @@ class RegisterState extends State<Registerthree> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: const Header(
-            title: 'REGISTRO - PASO 3', background: '#FF2D3E50', height: 56),
+        appBar: const Header(title: 'REGISTRO - PASO 3', background: '#FF2D3E50', height: 56),
         body: ListView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -75,56 +103,58 @@ class RegisterState extends State<Registerthree> {
               alignment: Alignment.center,
               child: _buildHeader(),
             ),
-            _buildTextpassInput('Contraseña'),
-            _buildTextpassInput('Confirmar contraseña'),
+            _buildTextpassInput('Contraseña', _passwordController1, _obscurePassword1),
+            _buildTextpassInput('Confirmar contraseña', _passwordController2, _obscurePassword2),
             Container(
               margin: const EdgeInsets.only(top: 50),
-              child: const Text(
-                '- 8 caracteres como mínimo.\n'
-                '- Al menos un carácter en minúscula.\n'
-                '- Al menos un carácter en mayúscula.\n'
-                '- Al menos un número.\n'
-                '- Al menos un carácter especial.\n',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFF6B6B6B),
-                ),
-                textAlign: TextAlign.justify,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    '- 8 caracteres como mínimo.',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF6B6B6B),
+                    ),
+                  ),
+                  Text(
+                    '- Al menos un carácter en minúscula.',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF6B6B6B),
+                    ),
+                  ),
+                  Text(
+                    '- Al menos un carácter en mayúscula.',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF6B6B6B),
+                    ),
+                  ),
+                  Text(
+                    '- Al menos un número.',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF6B6B6B),
+                    ),
+                  ),
+                  Text(
+                    '- Al menos un carácter especial.',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF6B6B6B),
+                    ),
+                  ),
+                ],
               ),
-            ),
+            )
           ],
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(20),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  transitionDuration: const Duration(
-                      milliseconds: 500), // Ajusta la duración de la transición
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    var begin = const Offset(
-                        1.0, 0.0); // Inicio de la transición desde la derecha
-                    var end = Offset
-                        .zero; // Fin de la transición en la posición actual
-                    var tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: Curves.easeInOut));
-                    var offsetAnimation = animation.drive(tween);
-
-                    return FadeTransition(
-                      opacity: animation, // Aplica el efecto de desvanecimiento
-                      child: SlideTransition(
-                        position: offsetAnimation,
-                        child: child,
-                      ),
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) =>
-                      const Registerfour(),
-                ),
-              );
+              context.push('/registrar4');
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,

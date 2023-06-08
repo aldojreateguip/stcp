@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/appbar.dart';
 import 'package:stcp/widgets/registertwo.dart';
 
@@ -58,6 +59,29 @@ class RegisterState extends State<Register> {
     );
   }
 
+  Widget _buildTextInputMail(String labelText) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: labelText,
+          contentPadding: EdgeInsets.zero,
+        ),
+        style: const TextStyle(
+          fontSize: 18,
+        ),
+        cursorHeight: 25,
+        cursorRadius: const Radius.circular(2),
+        keyboardType:
+            TextInputType.emailAddress, // Teclado para correo electrónico
+        inputFormatters: [
+          FilteringTextInputFormatter
+              .singleLineFormatter // Permitir solo una línea de texto
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -77,40 +101,14 @@ class RegisterState extends State<Register> {
             ),
             _buildTextInput('Nombres Completos'),
             _buildTextInput('Apellidos'),
-            _buildTextInput('Correo electrónico'),
+            _buildTextInputMail('Correo electrónico'),
           ],
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(20),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  transitionDuration: const Duration(
-                      milliseconds: 500), // Ajusta la duración de la transición
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    var begin = const Offset(
-                        1.0, 0.0); // Inicio de la transición desde la derecha
-                    var end = Offset
-                        .zero; // Fin de la transición en la posición actual
-                    var tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: Curves.easeInOut));
-                    var offsetAnimation = animation.drive(tween);
-
-                    return FadeTransition(
-                      opacity: animation, // Aplica el efecto de desvanecimiento
-                      child: SlideTransition(
-                        position: offsetAnimation,
-                        child: child,
-                      ),
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) =>
-                      const Registertwo(),
-                ),
-              );
+              context.push('/registrar2');
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
