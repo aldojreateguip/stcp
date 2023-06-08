@@ -142,7 +142,6 @@ class LoginBody extends ConsumerWidget {
                     onPressed: () {
                       ref.read(loginFormProvider.notifier).onFormSubmit();
                       // Acción a realizar cuando se presione el botón
-                      // Navigator.pushNamed(context, 'consultas');
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
