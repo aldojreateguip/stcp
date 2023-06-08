@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/Login/providers/auth_providers.dart';
 import 'infraestructure/infraestructure.dart';
+import 'providers/deudas_provider.dart';
 
 class ConsultasPage extends ConsumerStatefulWidget {
   const ConsultasPage({super.key});
@@ -294,12 +295,17 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
 
   Widget _crearBoton() {
     // ignore: sized_box_for_whitespace
+    final deudasState = ref.read(deudasProvider.notifier);
     return Container(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {
-          DeudaDatasourceImpl().getDeudasByPage(codContribuyente, anioSelected,
-              cuotaSelected, tributoSelected, coactivoSelected);
+        onPressed: () async {
+          await deudasState.loadDeudasPage(
+              codContribuyente,
+              anioSelected ?? '',
+              cuotaSelected ?? '',
+              tributoSelected ?? '',
+              coactivoSelected ?? '');
 
           context.push('/listaConsulta');
         },
