@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/Login/providers/auth_providers.dart';
-import 'infraestructure/infraestructure.dart';
 import 'providers/deudas_provider.dart';
 
 class ConsultasPage extends ConsumerStatefulWidget {
@@ -34,11 +33,10 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
   String? tributoSelected = '';
 
   String? coactivoSelected = '';
-  final List<String> _coactivo = ['SI', 'NO'];
   String codContribuyente = '';
   @override
   Widget build(BuildContext context) {
-    final filtros = ref.watch(authProvider).user;
+    final filtros = ref.read(authProvider).user;
     codContribuyente = filtros!.id;
     return Scaffold(
       appBar: AppBar(
@@ -119,7 +117,7 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
 
   List<DropdownMenuItem<String>> getOpcionesDrop(List list) {
     List<DropdownMenuItem<String>> lista = [
-      const DropdownMenuItem(value: '', child: Text('Seleecione año'))
+      const DropdownMenuItem(value: '', child: Text('Seleccione año'))
     ];
 
     // ignore: avoid_function_literals_in_foreach_calls
@@ -163,7 +161,7 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
 
   List<DropdownMenuItem<String>> getOpcionesCuotas() {
     List<DropdownMenuItem<String>> lista = [
-      const DropdownMenuItem(value: '', child: Text('Seleecione Cuota'))
+      const DropdownMenuItem(value: '', child: Text('Seleccione Cuota'))
     ];
 
     // ignore: avoid_function_literals_in_foreach_calls
@@ -207,7 +205,7 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
 
   List<DropdownMenuItem<String>> getOpcionesTributo(List trib) {
     List<DropdownMenuItem<String>> lista = [
-      const DropdownMenuItem(value: '', child: Text('Seleecione Tributo'))
+      const DropdownMenuItem(value: '', child: Text('Seleccione Tributo'))
     ];
 
     // ignore: avoid_function_literals_in_foreach_calls
@@ -251,16 +249,10 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
 
   List<DropdownMenuItem<String>> getOpcionesCoactivo() {
     List<DropdownMenuItem<String>> lista = [
-      const DropdownMenuItem(value: '', child: Text('Seleecione Coactivo'))
+      const DropdownMenuItem(value: '', child: Text('Seleccione Coactivo')),
+      const DropdownMenuItem(value: 'S', child: Text('SI')),
+      const DropdownMenuItem(value: 'N', child: Text('NO'))
     ];
-
-    // ignore: avoid_function_literals_in_foreach_calls
-    _coactivo.forEach((value) {
-      lista.add(DropdownMenuItem(
-        value: value,
-        child: Text(value),
-      ));
-    });
     return lista;
   }
 
@@ -295,7 +287,8 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
 
   Widget _crearBoton() {
     // ignore: sized_box_for_whitespace
-    final deudasState = ref.read(deudasProvider.notifier);
+    final deudasState = ref.watch(deudasProvider.notifier);
+    // ignore: sized_box_for_whitespace
     return Container(
       width: double.infinity,
       child: ElevatedButton(
@@ -306,8 +299,9 @@ class ConsultasPageState extends ConsumerState<ConsultasPage> {
               cuotaSelected ?? '',
               tributoSelected ?? '',
               coactivoSelected ?? '');
-
-          context.push('/listaConsulta');
+          if (deudasState.state.isLoading == false) {
+            context.push('/listaConsulta');
+          }
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
