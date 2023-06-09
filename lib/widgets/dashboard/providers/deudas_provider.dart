@@ -19,20 +19,18 @@ class DeudasNotifier extends StateNotifier<DeudasState> {
   Future loadDeudasPage(String contribuyente, String year, String cuota,
       String tributo, String coactivo) async {
     if (state.isLoading) return;
-    state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true, deudas: []);
     final deudas = await deudasRepository.getDeudasByPage(
         contribuyente, year, cuota, tributo, coactivo);
     if (deudas.isEmpty) {
       state = state.copyWith(isLoading: false);
       return;
     }
-    state = state.copyWith(isLoading: false);
+    state = state.copyWith(isLoading: false, deudas: deudas);
   }
 }
 
 class DeudasState {
-  // final bool isLastPage;
-  // final int limit;
   final bool isLoading;
   final List<Deuda> deudas;
 

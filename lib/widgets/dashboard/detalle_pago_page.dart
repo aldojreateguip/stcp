@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DetallePagoPage extends StatefulWidget {
-  const DetallePagoPage({super.key});
+class DetallePagoPage extends ConsumerStatefulWidget {
+  final String idContribuyente;
+  const DetallePagoPage({super.key, required this.idContribuyente});
 
   @override
-  State<DetallePagoPage> createState() => _DetallePagoPageState();
+  DetallePagoPageState createState() => DetallePagoPageState();
 }
 
-class _DetallePagoPageState extends State<DetallePagoPage> {
+class DetallePagoPageState extends ConsumerState<DetallePagoPage> {
   final _cuota = '01';
   final _alertPagotxt = '¿Esta seguro de realizar el pago de esta cuota?';
   @override
@@ -27,7 +29,7 @@ class _DetallePagoPageState extends State<DetallePagoPage> {
               Container(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 20.0, vertical: 15.0),
-                child: Text('CUOTA N° $_cuota',
+                child: Text('CUOTA N° ${widget.idContribuyente}',
                     style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,

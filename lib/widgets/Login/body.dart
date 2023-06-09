@@ -129,8 +129,9 @@ class LoginBody extends ConsumerWidget {
                     cursorRadius: const Radius.circular(2),
                     onChanged:
                         ref.read(loginFormProvider.notifier).onPasswordChange,
-                    onSubmitted: (_) =>
-                        ref.read(loginFormProvider.notifier).onFormSubmit(),
+                    onSubmitted: (_) => loginForm.isPosting
+                        ? null
+                        : ref.read(loginFormProvider.notifier).onFormSubmit(),
                   ),
                 ),
                 const Spacer(),
@@ -140,7 +141,9 @@ class LoginBody extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      ref.read(loginFormProvider.notifier).onFormSubmit();
+                      loginForm.isPosting
+                          ? null
+                          : ref.read(loginFormProvider.notifier).onFormSubmit();
                       // Acción a realizar cuando se presione el botón
                     },
                     style: ElevatedButton.styleFrom(
