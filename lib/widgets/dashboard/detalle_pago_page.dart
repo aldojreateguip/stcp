@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stcp/widgets/Login/providers/auth_providers.dart';
 
 class DetallePagoPage extends ConsumerStatefulWidget {
-  final String idContribuyente;
-  const DetallePagoPage({super.key, required this.idContribuyente});
+  final String idDeuda;
+  const DetallePagoPage({super.key, required this.idDeuda});
 
   @override
   DetallePagoPageState createState() => DetallePagoPageState();
@@ -12,8 +13,11 @@ class DetallePagoPage extends ConsumerStatefulWidget {
 class DetallePagoPageState extends ConsumerState<DetallePagoPage> {
   final _cuota = '01';
   final _alertPagotxt = '¿Esta seguro de realizar el pago de esta cuota?';
+  String codContri = '';
   @override
   Widget build(BuildContext context) {
+    final idContri = ref.read(authProvider).user;
+    codContri = idContri!.id;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detalle Pago'),
@@ -29,7 +33,8 @@ class DetallePagoPageState extends ConsumerState<DetallePagoPage> {
               Container(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 20.0, vertical: 15.0),
-                child: Text('CUOTA N° ${widget.idContribuyente}',
+                child: Text(
+                    'CUOTA N° ${widget.idDeuda}', //TODO:probar si llega el id
                     style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,

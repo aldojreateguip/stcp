@@ -45,8 +45,9 @@ class PagosListPageState extends ConsumerState {
                   return ListTile(
                     title:
                         Text('CUOTA: ${item.cuota},  TOTAL: S/. ${item.total}'),
-                    subtitle: Text('${item.descripcion}, ${item.anio}, ${item.fase}'
-                        .toUpperCase()), //el metodo getIcon no es tan necesario, solo es un forma de llamar un icono desde un json
+                    subtitle: Text(
+                        '${item.descripcion}, ${item.anio}, ${item.fase}'
+                            .toUpperCase()),
                     trailing: Icon(
                       Icons.arrow_forward_ios_outlined,
                       color: Colors.cyan[400],

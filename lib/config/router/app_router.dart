@@ -152,7 +152,7 @@ final goRouterProvider = Provider((ref) {
         GoRoute(
           path: '/detallePago/:id',
           builder: (context, state) => DetallePagoPage(
-            idContribuyente: state.pathParameters['id'] ?? 'no-id',
+            idDeuda: state.pathParameters['id'] ?? 'no-id',
           ),
         ),
       ],
