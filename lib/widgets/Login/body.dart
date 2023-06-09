@@ -87,7 +87,6 @@ class _LoginBodyState extends State<LoginBody> {
                         ),
                       ),
                     ),
-
                     const SizedBox(height: textMarginTop),
                     const Text(
                       textLogin,
@@ -96,7 +95,6 @@ class _LoginBodyState extends State<LoginBody> {
                         fontSize: textFontSize,
                         fontWeight: fontType,
                         color: Color(0xFF6B6B6B),
-
                       ),
                     ),
                     Padding(
@@ -154,9 +152,11 @@ class _LoginBodyState extends State<LoginBody> {
                             onChanged: ref
                                 .read(loginFormProvider.notifier)
                                 .onPasswordChange,
-                            onSubmitted: (_) => ref
-                                .read(loginFormProvider.notifier)
-                                .onFormSubmit(),
+                            onSubmitted: (_) => loginForm.isPosting
+                                ? null
+                                : ref
+                                    .read(loginFormProvider.notifier)
+                                    .onFormSubmit(),
                           ),
                           IconButton(
                             onPressed: () {
@@ -181,9 +181,11 @@ class _LoginBodyState extends State<LoginBody> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: ElevatedButton(
                         onPressed: () {
-                          ref.read(loginFormProvider.notifier).onFormSubmit();
-                          // Acción a realizar cuando se presione el botón
-                          // Navigator.pushNamed(context, 'consultas');
+                          loginForm.isPosting
+                              ? null
+                              : ref
+                                  .read(loginFormProvider.notifier)
+                                  .onFormSubmit();
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
