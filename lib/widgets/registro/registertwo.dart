@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/appbar.dart';
-import 'package:stcp/widgets/registerthree.dart';
+import 'package:stcp/widgets/registro/registerthree.dart';
 
 class Registertwo extends StatefulWidget {
   const Registertwo({super.key});

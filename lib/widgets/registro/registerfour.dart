@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/appbar.dart';
 
-import 'homepage.dart';
+import '../homepage.dart';
 
 class Registerfour extends StatefulWidget {
   const Registerfour({super.key});

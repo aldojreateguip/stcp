@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/appbar.dart';
-import 'package:stcp/widgets/registertwo.dart';
 
-class Register extends StatefulWidget {
+import 'providers/provider.dart';
+
+class Register extends ConsumerStatefulWidget {
   const Register({super.key});
 
   @override
   RegisterState createState() => RegisterState();
 }
 
-class RegisterState extends State<Register> {
+class RegisterState extends ConsumerState<Register> {
 // Índice de la opción seleccionada
   final String imageUrl = 'assets/images/reg2.png';
 
@@ -36,13 +38,57 @@ class RegisterState extends State<Register> {
     );
   }
 
-  Widget _buildTextInput(String labelText) {
+  Widget _buildTextNombre(String labelText) {
+    final step1Prov = ref.watch(registerFormStep1Provider);
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: TextField(
+        onChanged: ref.read(registerFormStep1Provider.notifier).onNombreChange,
         decoration: InputDecoration(
           labelText: labelText,
           contentPadding: EdgeInsets.zero,
+          errorText:
+              step1Prov.isFormPosted ? step1Prov.nombre.errorMessage : null,
+          errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red.shade200),
+          ),
+          focusedErrorBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
+        ),
+        style: const TextStyle(
+          fontSize: 18,
+        ),
+        cursorHeight: 25,
+        cursorRadius: const Radius.circular(2),
+        keyboardType:
+            TextInputType.text, // Establecer el tipo de teclado a texto
+        inputFormatters: [
+          FilteringTextInputFormatter
+              .singleLineFormatter // Permitir solo una línea de texto
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextApellido(String labelText) {
+    final step1Prov = ref.watch(registerFormStep1Provider);
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: TextField(
+        onChanged:
+            ref.read(registerFormStep1Provider.notifier).onApellidoChange,
+        decoration: InputDecoration(
+          labelText: labelText,
+          contentPadding: EdgeInsets.zero,
+          errorText:
+              step1Prov.isFormPosted ? step1Prov.apellido.errorMessage : null,
+          errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red.shade200),
+          ),
+          focusedErrorBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
         ),
         style: const TextStyle(
           fontSize: 18,
@@ -60,12 +106,22 @@ class RegisterState extends State<Register> {
   }
 
   Widget _buildTextInputMail(String labelText) {
+    final step1Prov = ref.watch(registerFormStep1Provider);
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: TextField(
+        onChanged: ref.read(registerFormStep1Provider.notifier).onEmailChange,
         decoration: InputDecoration(
           labelText: labelText,
           contentPadding: EdgeInsets.zero,
+          errorText:
+              step1Prov.isFormPosted ? step1Prov.email.errorMessage : null,
+          errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red.shade200),
+          ),
+          focusedErrorBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
         ),
         style: const TextStyle(
           fontSize: 18,
@@ -82,8 +138,22 @@ class RegisterState extends State<Register> {
     );
   }
 
+  void showSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
   @override
   Widget build(BuildContext context) {
+    ref.listen(
+      registerStepProvider,
+      (previous, next) {
+        if (next.errorMessage.isEmpty) return;
+        showSnackbar(context, next.errorMessage);
+      },
+    );
+    final status = ref.watch(registerStepProvider.notifier);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -99,16 +169,25 @@ class RegisterState extends State<Register> {
               alignment: Alignment.center,
               child: _buildHeader(),
             ),
-            _buildTextInput('Nombres Completos'),
-            _buildTextInput('Apellidos'),
+            _buildTextNombre('Nombres Completos'),
+            _buildTextApellido('Apellidos'),
             _buildTextInputMail('Correo electrónico'),
           ],
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(20),
           child: ElevatedButton(
-            onPressed: () {
-              context.push('/registrar2');
+            onPressed: () async {
+              ref.watch(registerFormStep1Provider).isPosting
+                  ? null
+                  : await ref
+                      .read(registerFormStep1Provider.notifier)
+                      .onFormSubmitStep1();
+
+              if (status.state.stepStatus == StepStatus.correct) {
+                context.push('/registrar2');
+              }
+              // context.push('/registrar2');
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
