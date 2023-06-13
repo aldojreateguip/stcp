@@ -9,10 +9,10 @@ import 'package:stcp/widgets/dashboard/pagoslist_page.dart';
 import 'package:stcp/widgets/dashboard/consultas_page.dart';
 import 'package:stcp/widgets/dashboard/detalle_pago_page.dart';
 
-import '../../widgets/register.dart';
-import '../../widgets/registertwo.dart';
-import '../../widgets/registerthree.dart';
-import '../../widgets/registerfour.dart';
+import '../../widgets/registro/register.dart';
+import '../../widgets/registro/registertwo.dart';
+import '../../widgets/registro/registerthree.dart';
+import '../../widgets/registro/registerfour.dart';
 import 'app_router_notifier.dart';
 
 final goRouterProvider = Provider((ref) {

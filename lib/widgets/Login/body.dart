@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/Login/providers/auth_providers.dart';
 import 'package:stcp/widgets/Login/providers/login_form_providers.dart';
 
-import '../register.dart';
+import '../registro/register.dart';
 
 class LoginBody extends StatefulWidget {
   const LoginBody({Key? key}) : super(key: key);
@@ -87,7 +87,6 @@ class _LoginBodyState extends State<LoginBody> {
                         ),
                       ),
                     ),
-
                     const SizedBox(height: textMarginTop),
                     const Text(
                       textLogin,
@@ -96,7 +95,6 @@ class _LoginBodyState extends State<LoginBody> {
                         fontSize: textFontSize,
                         fontWeight: fontType,
                         color: Color(0xFF6B6B6B),
-
                       ),
                     ),
                     Padding(

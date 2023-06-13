@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stcp/widgets/appbar.dart';
-import 'package:stcp/widgets/registerfour.dart';
+import 'package:stcp/widgets/registro/registerfour.dart';
 
 class Registerthree extends StatefulWidget {
   const Registerthree({Key? key}) : super(key: key);
@@ -13,10 +13,14 @@ class Registerthree extends StatefulWidget {
 
 class RegisterState extends State<Registerthree> {
   final String imageUrl = 'assets/images/reg3.png';
-  ValueNotifier<bool> _obscurePassword1 = ValueNotifier<bool>(true); // Variable para controlar si se muestra o no la contraseña 1
-  ValueNotifier<bool> _obscurePassword2 = ValueNotifier<bool>(true); // Variable para controlar si se muestra o no la contraseña 2
-  TextEditingController _passwordController1 = TextEditingController(); // Controlador del campo de texto de la contraseña 1
-  TextEditingController _passwordController2 = TextEditingController(); // Controlador del campo de texto de la contraseña 2
+  ValueNotifier<bool> _obscurePassword1 = ValueNotifier<bool>(
+      true); // Variable para controlar si se muestra o no la contraseña 1
+  ValueNotifier<bool> _obscurePassword2 = ValueNotifier<bool>(
+      true); // Variable para controlar si se muestra o no la contraseña 2
+  TextEditingController _passwordController1 =
+      TextEditingController(); // Controlador del campo de texto de la contraseña 1
+  TextEditingController _passwordController2 =
+      TextEditingController(); // Controlador del campo de texto de la contraseña 2
 
   Widget _buildHeader() {
     return Column(
@@ -60,7 +64,8 @@ class RegisterState extends State<Registerthree> {
                   color: const Color(0xFF6B6B6B),
                 ),
                 onPressed: () {
-                  obscurePassword.value = !obscurePassword.value; // Alternar el valor del ValueNotifier
+                  obscurePassword.value = !obscurePassword
+                      .value; // Alternar el valor del ValueNotifier
                 },
               ),
             ),
@@ -82,8 +87,10 @@ class RegisterState extends State<Registerthree> {
 
   @override
   void dispose() {
-    _passwordController1.dispose(); // Liberar el controlador de la contraseña 1 al finalizar
-    _passwordController2.dispose(); // Liberar el controlador de la contraseña 2 al finalizar
+    _passwordController1
+        .dispose(); // Liberar el controlador de la contraseña 1 al finalizar
+    _passwordController2
+        .dispose(); // Liberar el controlador de la contraseña 2 al finalizar
     super.dispose();
   }
 
@@ -94,7 +101,8 @@ class RegisterState extends State<Registerthree> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: const Header(title: 'REGISTRO - PASO 3', background: '#FF2D3E50', height: 56),
+        appBar: const Header(
+            title: 'REGISTRO - PASO 3', background: '#FF2D3E50', height: 56),
         body: ListView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -103,8 +111,10 @@ class RegisterState extends State<Registerthree> {
               alignment: Alignment.center,
               child: _buildHeader(),
             ),
-            _buildTextpassInput('Contraseña', _passwordController1, _obscurePassword1),
-            _buildTextpassInput('Confirmar contraseña', _passwordController2, _obscurePassword2),
+            _buildTextpassInput(
+                'Contraseña', _passwordController1, _obscurePassword1),
+            _buildTextpassInput('Confirmar contraseña', _passwordController2,
+                _obscurePassword2),
             Container(
               margin: const EdgeInsets.only(top: 50),
               child: Column(
