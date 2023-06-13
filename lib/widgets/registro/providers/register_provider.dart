@@ -28,7 +28,21 @@ class StepNotifier extends StateNotifier<StepState> {
   }
 
   Future<void> regisStep2(String tipdoc, String numdoc, String celu,
-      String codeContribuyente) async {}
+      String codeContribuyente) async {
+    state = state.copyWith(
+      stepStatus: StepStatus.checking,
+    );
+    try {
+      final step2 = await registerRepository.step2(
+          tipdoc, numdoc, celu, codeContribuyente);
+      _setValidStep();
+    } on CustomError catch (e) {
+      badStep(e.message);
+    } catch (e) {
+      badStep('Error no controlado');
+    }
+  }
+
   Future<void> regisLastStep(String password, String passwordconf) async {}
 
   void _setValidStep() {

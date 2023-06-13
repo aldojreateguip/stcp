@@ -12,8 +12,16 @@ class Registertwo extends StatefulWidget {
 }
 
 class RegisterState extends State<Registertwo> {
-  int _selectedIndex = 0; // Índice de la opción seleccionada
+  int _selectedIndex = 1; // Índice de la opción seleccionada
+  TextEditingController _documentNumberController = TextEditingController();
+
   final String imageUrl = 'assets/images/reg1.png';
+  void _clearDocumentNumber() {
+    setState(() {
+      _documentNumberController.text = ''; // Limpiar el número de documento
+      FocusScope.of(context).unfocus();
+    });
+  }
 
   Widget _buildHeader() {
     return Column(
@@ -73,19 +81,27 @@ class RegisterState extends State<Registertwo> {
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: () => setState(() => _selectedIndex = 0),
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex =
+                          1; // Cambio a 1 para DNI // TODO: Actualizar índice para DNI
+                      _clearDocumentNumber();
+                    });
+                  }, // Cambio a 1 para DNI // TODO: Actualizar índice para DNI
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      gradient: _selectedIndex == 0
+                      gradient: _selectedIndex ==
+                              1 // Cambio a 1 para DNI // TODO: Actualizar índice para DNI
                           ? const LinearGradient(
                               colors: [Color(0xFF1A8CAB), Color(0xFF0F7490)],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                             )
                           : null,
-                      boxShadow: _selectedIndex == 0
+                      boxShadow: _selectedIndex ==
+                              1 // Cambio a 1 para DNI // TODO: Actualizar índice para DNI
                           ? [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.20),
@@ -101,7 +117,8 @@ class RegisterState extends State<Registertwo> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: _selectedIndex == 0
+                          color: _selectedIndex ==
+                                  1 // Cambio a 1 para DNI // TODO: Actualizar índice para DNI
                               ? Colors.white
                               : const Color.fromARGB(115, 103, 103, 103),
                         ),
@@ -112,19 +129,27 @@ class RegisterState extends State<Registertwo> {
               ),
               Expanded(
                 child: GestureDetector(
-                  onTap: () => setState(() => _selectedIndex = 1),
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex =
+                          2; // Cambio a 2 para RUC // TODO: Actualizar índice para RUC
+                      _clearDocumentNumber();
+                    });
+                  }, // Cambio a 2 para RUC // TODO: Actualizar índice para RUC
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      gradient: _selectedIndex == 1
+                      gradient: _selectedIndex ==
+                              2 // Cambio a 2 para RUC // TODO: Actualizar índice para RUC
                           ? const LinearGradient(
                               colors: [Color(0xFF1A8CAB), Color(0xFF0F7490)],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                             )
                           : null,
-                      boxShadow: _selectedIndex == 1
+                      boxShadow: _selectedIndex ==
+                              2 // Cambio a 2 para RUC // TODO: Actualizar índice para RUC
                           ? [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.20),
@@ -140,7 +165,8 @@ class RegisterState extends State<Registertwo> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: _selectedIndex == 1
+                          color: _selectedIndex ==
+                                  2 // Cambio a 2 para RUC // TODO: Actualizar índice para RUC
                               ? Colors.white
                               : const Color.fromARGB(115, 103, 103, 103),
                         ),
@@ -156,7 +182,53 @@ class RegisterState extends State<Registertwo> {
     );
   }
 
-  Widget _buildNumberInput(String labelText) {
+  Widget _buildNumberDoc(String labelText) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: TextField(
+        controller: _documentNumberController,
+        decoration: InputDecoration(
+          labelText: labelText,
+          contentPadding: EdgeInsets.zero,
+        ),
+        style: const TextStyle(
+          fontSize: 18,
+        ),
+        cursorHeight: 25,
+        cursorRadius: const Radius.circular(2),
+        keyboardType:
+            TextInputType.number, // Establecer el tipo de teclado a numérico
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        onChanged: (value) {
+          setState(() {
+            // Actualizar el valor del número de documento
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildNumberCel(String labelText) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: labelText,
+          contentPadding: EdgeInsets.zero,
+        ),
+        style: const TextStyle(
+          fontSize: 18,
+        ),
+        cursorHeight: 25,
+        cursorRadius: const Radius.circular(2),
+        keyboardType:
+            TextInputType.number, // Establecer el tipo de teclado a numérico
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      ),
+    );
+  }
+
+  Widget _buildNumberCode(String labelText) {
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: TextField(
@@ -194,9 +266,9 @@ class RegisterState extends State<Registertwo> {
               child: _buildHeader(),
             ),
             _buildDocumentTypeSelector(),
-            _buildNumberInput('Número de Documento'),
-            _buildNumberInput('Celular'),
-            _buildNumberInput('Código de Contribuyente*'),
+            _buildNumberDoc('Número de Documento'),
+            _buildNumberCel('Celular'),
+            _buildNumberCode('Código de Contribuyente*'),
           ],
         ),
         bottomNavigationBar: Padding(
@@ -204,6 +276,7 @@ class RegisterState extends State<Registertwo> {
           child: ElevatedButton(
             onPressed: () {
               context.push('/registrar3');
+              print(_selectedIndex.toString());
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,

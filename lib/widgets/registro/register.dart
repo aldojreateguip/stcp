@@ -185,7 +185,9 @@ class RegisterState extends ConsumerState<Register> {
                       .onFormSubmitStep1();
 
               if (status.state.stepStatus == StepStatus.correct) {
-                context.push('/registrar2');
+                if (ref.watch(registerFormStep1Provider).isValid) {
+                  context.push('/registrar2');
+                }
               }
               // context.push('/registrar2');
             },

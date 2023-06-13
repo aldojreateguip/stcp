@@ -12,8 +12,9 @@ class RegisterRepositoryImpl extends RegisterRepositories {
   }
 
   @override
-  Future<void> step2(String ndoc, String telefono, String codContribuyente) {
-    return step2(ndoc, telefono, codContribuyente);
+  Future<void> step2(
+      String tipdoc, String ndoc, String telefono, String codContribuyente) {
+    return datasource.step2(tipdoc, ndoc, telefono, codContribuyente);
   }
 
   @override
